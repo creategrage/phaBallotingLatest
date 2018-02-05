@@ -8000,7 +8000,7 @@ base-chart.chart {
     overflow-x: hidden;
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
-    width: 200px; }
+    width: 260px; }
     .sidebar .sidebar-nav::-webkit-scrollbar {
       position: absolute;
       width: 10px;
@@ -8018,7 +8018,7 @@ base-chart.chart {
       border-style: solid;
       border-width: 1px 2px; }
   .sidebar .nav {
-    width: 200px;
+    width: 260px;
     -ms-flex-direction: column;
         flex-direction: column;
     min-height: 100%; }
@@ -9076,11 +9076,11 @@ app-root {
 .sidebar-fixed .sidebar {
   position: fixed;
   z-index: 1019;
-  width: 200px;
+  width: 260px;
   height: calc(100vh - 55px); }
 
 .sidebar-fixed .main, .sidebar-fixed .app-footer {
-  margin-left: 200px; }
+  margin-left: 260px; }
 
 .sidebar-fixed.sidebar-hidden .main, .sidebar-fixed.sidebar-hidden .app-footer {
   margin-left: 0; }

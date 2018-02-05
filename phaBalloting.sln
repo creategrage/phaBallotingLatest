@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "phaBalloting", "phaBalloting\phaBalloting.csproj", "{830A397C-3F1C-45BF-91C5-50CA0AA6EBF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "phaBallotting.Data", "phaBallotting.Data\phaBallotting.Data.csproj", "{577F9E9D-E8EA-4DEF-A51E-7437A75BA56D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "phaBalloting.Data", "phaBallotting.Data\phaBalloting.Data.csproj", "{577F9E9D-E8EA-4DEF-A51E-7437A75BA56D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,30 @@
+﻿@model phaBalloting.Data.Balloting
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Ballotings", FormMethod.Post))
+{
+
+    @*<b>Enter the Percentage for Waiting:</b>
+    <input type="text" name="SelectPercent" />
+    <br />*@
+    <b>Select the Event ID:</b>
+    @Html.DropDownList("EventID", null, "--Select Event--", htmlAttributes: new { @class = "form-control" })
+
+    <b> Select Project to be Balloting: </b>
+    @Html.DropDownList("ProjectID", null, "--Select Project--", htmlAttributes: new { @class = "form-control" })
+
+    @*@Html.EditorFor("Percent", htmlAttributes: new { @class = "form-control" } )*@
+    
+    <input type="submit" name="submit" value="Run Ballot" />
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

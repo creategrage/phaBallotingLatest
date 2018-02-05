@@ -1,0 +1,93 @@
+﻿@model IEnumerable<phaBalloting.Areas.Admin.Models.AuthenticationModel.authenticationClass>
+@{
+    ViewBag.Title = "Authentications";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Authentications</h2>
+<p id="message" style="height:20px;">
+</p>
+<div class="row">
+    <div class="col-lg-12">
+        <a href="@Url.Action("Index")" class="btn btn-success pull-right"><i class="icon-list"></i>Back to User Role List</a>
+    </div>
+</div>
+<table class="table table-hover">
+    <tr>
+        <th></th>
+        <th>View</th>
+        <th>Add</th>
+        <th>Update</th>
+        <th>Delete</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        string ViewRecords = item.ViewRecords == true ? "Checked" : "";
+        string AddRecords = item.AddRecords == true ? "Checked" : "";
+        string EditRecords = item.EditRecords == true ? "Checked" : "";
+        string DeleteRecords = item.DeleteRecords == true ? "Checked" : "";
+        <tr>
+            <td>
+                @Html.Label(item.Description)
+            </td>
+            <td>
+                <label><input type='checkbox' data-id="@item.ID" data-roleid="@item.RoleId" data-formid="@item.FormID" data-col="ViewRecords" @ViewRecords /><span class="lbl"></span></label>
+            </td>
+            <td>
+                <label><input type='checkbox' data-id="@item.ID" data-roleid="@item.RoleId" data-formid="@item.FormID" data-col="AddRecords" @AddRecords /><span class="lbl"></span></label>
+            </td>
+            <td>
+                <label><input type='checkbox' data-id="@item.ID" data-roleid="@item.RoleId" data-formid="@item.FormID" data-col="EditRecords" @EditRecords /><span class="lbl"></span></label>
+            </td>
+            <td>
+                <label><input type='checkbox' data-id="@item.ID" data-roleid="@item.RoleId" data-formid="@item.FormID" data-col="DeleteRecords" @DeleteRecords /><span class="lbl"></span></label>
+            </td>
+
+        </tr>
+    }
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+    $('input[type=checkbox]').change(function () {
+        $('#message').html('');
+        //alert(id);
+        var Auth = {};
+        Auth.FormID = $(this).data('formid');
+        Auth.RoleId = $(this).data('roleid');
+        var id = $(this).data("id");
+        if (parseInt(id) != -1)
+            Auth.ID = id;
+
+        $(this).closest('tr').find('input[type=checkbox]').each(function () {
+            var col = $(this).data('col');
+            var val = $(this).is(':checked');
+            //alert(col +"-"+val);
+            if (col == 'AddRecords') {
+                Auth.AddRecords = val;
+            }
+            else if (col == 'ViewRecords')
+                Auth.ViewRecords = val;
+            else if (col == 'EditRecords')
+                Auth.EditRecords = val;
+            else if (col == 'DeleteRecords')
+                Auth.DeleteRecords = val;
+        });
+        //alert(JSON.stringify({ auth: Auth }));
+        $.ajax({
+            url: '@Url.Action("SaveOrUpdate")',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ auth: Auth }),
+            success: function (data) {
+                if (data.trim() == 'true') $('#message').html('<div class="alert alert-success"  id="message">success fully stored to data base.</div>');
+                else $('#message').html('<div class="alert alert-danger"  id="message">unable to store to data base.</div>');
+                location.reload(true);
+            },
+            error: function (error, code, xhr) { $('#message').html('<div class="alert alert-danger"  id="message">unable to store to data base.</div>'); }
+        });
+    });
+    </script>
+}

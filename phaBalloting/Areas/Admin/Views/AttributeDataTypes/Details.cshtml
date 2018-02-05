@@ -1,0 +1,87 @@
+﻿@model phaBalloting.Data.AttributeDataType
+
+@{
+    ViewBag.Title = "Details";
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UnitDataType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Data Type Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataTypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Data Type")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataType)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Description")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("User Id")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Entry Date")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EntryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Modified By")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Modified Date")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("IsActive")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

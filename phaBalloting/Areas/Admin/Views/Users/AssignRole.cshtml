@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "AssignRole";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section breadcrumb
+{
+<li class="breadcrumb-item"><a href="@Url.Action("RoleList", "Users", new { area="admin"})">Roles</a>s1zraaZAA</li>
+
+    <li class="breadcrumb-item active">Assign Role</li>
+}
+<h2>AssignRole <a style="float:right;" class="btn btn-success" href="@Url.Action("RoleList")">Back to Role list</a></h2>
+@{
+    var roles = (SelectList)ViewBag.roles;
+    var users = (SelectList)ViewBag.users;
+}
+<label>Select Role</label>
+@using (Html.BeginForm()) { 
+    @Html.AntiForgeryToken()
+<p>
+    @Html.DropDownList("rolename", roles)
+</p>
+
+<label>Select User</label>
+<p>
+    @Html.DropDownList("userId", users)
+</p>
+ 
+    <input type="submit" />   
+}

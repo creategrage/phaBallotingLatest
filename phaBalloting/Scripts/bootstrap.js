@@ -29,7 +29,6 @@ var Util = function () {
     MozTransition: 'transitionend',
     OTransition: 'oTransitionEnd otransitionend',
     transition: 'transitionend' // shoutout AngusCroll (https://goo.gl/pxwQGp)
-
   };
 
   function toType(obj) {
@@ -109,18 +108,18 @@ var Util = function () {
       return prefix;
     },
     getSelectorFromElement: function getSelectorFromElement(element) {
-      var selector = element.getAttribute('data-target');
+        var selector = element.getAttribute('data-target');
 
-      if (!selector || selector === '#') {
-        selector = element.getAttribute('href') || '';
-      }
+        if (!selector || selector === '#') {
+            selector = element.getAttribute('href') || '';
+        }
 
-      try {
-        var $selector = $(document).find(selector);
-        return $selector.length > 0 ? selector : null;
-      } catch (error) {
-        return null;
-      }
+        try {
+            var $selector = $(document).find(selector);
+            return $selector.length > 0 ? selector : null;
+        } catch (error) {
+            return null;
+        }
     },
     reflow: function reflow(element) {
       return element.offsetHeight;

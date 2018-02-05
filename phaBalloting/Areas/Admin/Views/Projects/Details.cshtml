@@ -1,0 +1,79 @@
+﻿@model phaBalloting.Areas.Admin.Models.ProjectViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Project</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectLocation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalApplicableUnits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalApplicableUnits)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+    @{ 
+
+    }
+    <table class="table table-hover">
+        <tr>
+            <th>Number</th>
+            <th>Description</th>
+            @foreach (var attr in Model.Units.FirstOrDefault().Attributes)
+    {
+        <th>
+            @attr.key
+        </th>
+}
+        </tr>
+        @foreach (var units in Model.Units)
+    {
+            
+        <tr>
+            <th>@units.UnitNumber</th>
+            <th>@units.Description</th>
+            @foreach (var attr in units.Attributes)
+    {
+        <th>
+            @attr.value
+        </th>
+}
+        </tr>
+    }
+    </table>
+    
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

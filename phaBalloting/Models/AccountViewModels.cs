@@ -79,6 +79,12 @@ namespace phaBalloting.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.ImageUrl)]
+        [Display(Name = "Profile Pic")]
+        public string ProfilePic { get; set; }
+
+
     }
 
     public class ResetPasswordViewModel
@@ -108,5 +114,31 @@ namespace phaBalloting.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+
+    public class UserViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        [Required]
+        public string Id { get; set; }
+
+        [Required]
+        public string Role { get; set; }
+
+
+        [Required]
+        [Display(Name = "Status")]
+        public bool EmailConfirmed { get; set; }
+
     }
 }

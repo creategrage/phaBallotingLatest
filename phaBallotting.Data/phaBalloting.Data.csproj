@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{577F9E9D-E8EA-4DEF-A51E-7437A75BA56D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>phaBalloting.Data</RootNamespace>
+    <AssemblyName>phaBalloting.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="OfficeOpenXml.Core.ExcelPackage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OfficeOpenXml.Core.ExcelPackage.1.0.0\lib\net46\OfficeOpenXml.Core.ExcelPackage.dll</HintPath>
+    </Reference>
+    <Reference Include="Soothsilver.Random, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Soothsilver.Random.1.1.0\lib\net40\Soothsilver.Random.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppForm.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AttributeDataType.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AttributesType.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Authentication.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Balloting.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BPSGroup.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BPSList.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BPSProject.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Event.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Member.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="phaConfiguration.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="phaModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>phaModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="phaModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="phaModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>phaModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="PojectUnit.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Project.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectType.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectTypeConfiguration.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectUnitAttribute.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserActivity.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserProfile.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WaitingMember.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <EntityDeploy Include="phaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>phaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="phaModel.edmx.diagram">
+      <DependentUpon>phaModel.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="phaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>phaModel.edmx</DependentUpon>
+      <LastGenOutput>phaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="phaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>phaModel.edmx</DependentUpon>
+      <LastGenOutput>phaModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

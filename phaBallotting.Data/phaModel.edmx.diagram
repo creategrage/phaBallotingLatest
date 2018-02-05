@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3292fdc83d3546cb8a5ed557e372b5a7" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="phaBallotingModel.AppForm" Width="1.5" PointX="8.75" PointY="1.5" />
+        <EntityTypeShape EntityType="phaBallotingModel.AspNetRole" Width="1.5" PointX="8.75" PointY="5.5" />
+        <EntityTypeShape EntityType="phaBallotingModel.AttributeDataType" Width="1.5" PointX="1.5" PointY="17.25" />
+        <EntityTypeShape EntityType="phaBallotingModel.AttributesType" Width="1.5" PointX="0.75" PointY="3.125" />
+        <EntityTypeShape EntityType="phaBallotingModel.Authentication" Width="1.5" PointX="11" PointY="1" />
+        <EntityTypeShape EntityType="phaBallotingModel.Balloting" Width="1.5" PointX="10.5" PointY="15.5" />
+        <EntityTypeShape EntityType="phaBallotingModel.BPSGroup" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="phaBallotingModel.BPSList" Width="1.5" PointX="3" PointY="2.375" />
+        <EntityTypeShape EntityType="phaBallotingModel.BPSProject" Width="1.5" PointX="5.25" PointY="11.875" />
+        <EntityTypeShape EntityType="phaBallotingModel.Event" Width="1.5" PointX="6" PointY="20" />
+        <EntityTypeShape EntityType="phaBallotingModel.Member" Width="1.5" PointX="6" PointY="3.625" />
+        <EntityTypeShape EntityType="phaBallotingModel.phaConfiguration" Width="1.5" PointX="8.75" PointY="8.75" />
+        <EntityTypeShape EntityType="phaBallotingModel.PojectUnit" Width="1.5" PointX="5.25" PointY="14.875" />
+        <EntityTypeShape EntityType="phaBallotingModel.Project" Width="1.5" PointX="3" PointY="11.875" />
+        <EntityTypeShape EntityType="phaBallotingModel.ProjectTypeConfiguration" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="phaBallotingModel.ProjectType" Width="1.5" PointX="0.75" PointY="8.25" />
+        <EntityTypeShape EntityType="phaBallotingModel.ProjectUnitAttribute" Width="1.5" PointX="7.5" PointY="15" />
+        <EntityTypeShape EntityType="phaBallotingModel.UserActivity" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="phaBallotingModel.UserProfile" Width="1.5" PointX="10.75" PointY="7.75" />
+        <EntityTypeShape EntityType="phaBallotingModel.WaitingMember" Width="1.5" PointX="8.25" PointY="11.75" />
+        <AssociationConnector Association="phaBallotingModel.FK_Authentications_AppForms" />
+        <AssociationConnector Association="phaBallotingModel.FK_Authentications_AspNetRoles" />
+        <AssociationConnector Association="phaBallotingModel.FK_AttributeTypes_AttributeDataTypes" />
+        <AssociationConnector Association="phaBallotingModel.FK_ProjectTypeConfiguration_AttributesTypes" />
+        <AssociationConnector Association="phaBallotingModel.FK_ProjectUnitAttributes_AttributesTypes" />
+        <AssociationConnector Association="phaBallotingModel.FK__Balloting__Event__2739D489" />
+        <AssociationConnector Association="phaBallotingModel.FK__Balloting__Membe__282DF8C2" />
+        <AssociationConnector Association="phaBallotingModel.FK__Balloting__Proje__29221CFB" />
+        <AssociationConnector Association="phaBallotingModel.FK_BPSProjects_BPSLists" />
+        <AssociationConnector Association="phaBallotingModel.FK_Members_BPSLists" />
+        <AssociationConnector Association="phaBallotingModel.FK_BPSProjects_Projects" />
+        <AssociationConnector Association="phaBallotingModel.FK_WaitingMembers_Events" />
+        <AssociationConnector Association="phaBallotingModel.FK_WaitingMembers_Members" />
+        <AssociationConnector Association="phaBallotingModel.FK_PojectUnits_Projects" />
+        <AssociationConnector Association="phaBallotingModel.FK_ProjectUnitAttributes_PojectUnits" />
+        <AssociationConnector Association="phaBallotingModel.FK_Projects_ProjectTypes" />
+        <AssociationConnector Association="phaBallotingModel.FK_WaitingMembers_Project" />
+        <AssociationConnector Association="phaBallotingModel.FK_ProjectTypeConfiguration_ProjectTypes" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

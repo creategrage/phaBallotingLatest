@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "NotAuthrize";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<p class="label label-info">
+    Your are not allowed to access this page, please <a href="@Url.Action("login","account",new { area=""})">login</a> again with correct credentials or contact the admin for more details.
+</p>
+<p>
+    Click  <a href="@Url.Action("Index","Dashboard",new { area="admin"})">here to view dashboard</a>
+</p>

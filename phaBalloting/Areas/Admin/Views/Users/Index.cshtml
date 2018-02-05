@@ -1,0 +1,76 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<phaBalloting.Models.ApplicationUser>
+@using phaBalloting.Helpers;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>Application users</h3>
+    </div>
+
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            @using (Html.BeginForm("Index", "Users", FormMethod.Get))
+            {<div class="input-group">
+                    <input type="text" name="keywords" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">Go!</button>
+                    </span>
+                </div>}
+        </div>
+    </div>
+</div>
+
+<h2> <a style="float:right;" class="btn btn-success" href="@Url.Action("Create")">Add User</a></h2>
+
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="3"> <b>Records not found </b></td>
+            </tr>
+        }
+        else
+        {
+            foreach (var profile in Model)
+            {
+
+                <tr>
+                    <td>@profile.UserName</td>
+                    <td>@string.Join(" ,", profile.UserName.GetRoles())</td>
+                    <td>
+                        <span class="badge badge-success">@(profile.EmailConfirmed ? "Active" : "Inactive") </span>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Details","Users", new { username = profile.UserName })">Deatils</a> |
+                        <a href="@Url.Action("Edit","Users", new { username = profile.UserName })">Edit</a> |
+                        <a href="@Url.Action("Delete","Users", new { username = profile.UserName })">Delete</a> | 
+                        <a href="@Url.Action("Details","UserActivities", new { username = profile.Id })">Activity</a>
+                    </td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model, pageNumber => Url.Action("Index", new
+{
+    pageNumber,
+    option = Request.QueryString["keywords"]
+}))

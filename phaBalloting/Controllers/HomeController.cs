@@ -10,21 +10,13 @@ namespace phaBalloting.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Dashboard", new { area = "admin" });
+            }
+
+            return RedirectToAction("Login", "Account", new { area = "" });
         }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        
     }
 }

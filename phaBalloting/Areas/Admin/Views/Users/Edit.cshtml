@@ -1,0 +1,59 @@
+﻿@model phaBalloting.Models.UserProfile
+
+@{
+    ViewBag.Title = "";// "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <h2>Edit user account.</h2>
+</hgroup>
+
+@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                @Html.Label("Full Name")
+                @Html.TextBoxFor(m => m.FullName)
+            </li>
+            <li>
+                @Html.Label("Email")
+                @Html.TextBoxFor(m => m.Email)
+            </li>
+            <li>
+                @Html.Label("Mobile")
+                @Html.TextBoxFor(m => m.Mobile)
+            </li>
+            <li>
+                @Html.Label("User Name")
+                @Html.TextBoxFor(m => m.UserName)
+            </li>
+            
+            <li>
+            <img src="@Model.ProfilePic"  class="img-thumbnail"/>
+            </li>
+            <li>
+                @Html.Label("Profile Pic")
+                @Html.TextBox("ProfilePicFile", null, new { type = "file" })
+            </li>
+            <li>
+                @Html.Label("Status")
+                @Html.CheckBoxFor(m => m.Status)
+            </li>
+        </ol>
+        <input type="submit" value="Register" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

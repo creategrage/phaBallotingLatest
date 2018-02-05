@@ -1,0 +1,1544 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="phaBallotingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppForms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FormName" Type="varchar(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttributeDataTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DataType" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="150" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttributesTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttributeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="150" />
+          <Property Name="DataTypeId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedOn" Type="date" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Authentications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FormId" Type="int" Nullable="false" />
+          <Property Name="ViewRecords" Type="bit" />
+          <Property Name="EditRecords" Type="bit" />
+          <Property Name="DeleteRecords" Type="bit" />
+          <Property Name="AddRecords" Type="bit" />
+        </EntityType>
+        <EntityType Name="Balloting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="ProjectUnitID" Type="int" Nullable="false" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BPSGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="BPSGroup" Type="varchar" MaxLength="5" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="BPSLists">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BPS" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BPSProjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="BPSId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="EventLocation" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="date" />
+          <Property Name="LastModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OldMFormNo" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="NameOfOfficer" Type="varchar" MaxLength="530" Nullable="false" />
+          <Property Name="FatherName" Type="varchar" MaxLength="530" Nullable="false" />
+          <Property Name="HusbandName" Type="varchar" MaxLength="530" Nullable="false" />
+          <Property Name="Cnic" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="OfficeName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="OfficeStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfJoiningService" Type="date" Nullable="false" />
+          <Property Name="PostHeld" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OccutionalGroup" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="OfficeAddress" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="PermanentAddress" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="HomeTelephone" Type="varchar" MaxLength="38" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImageUrl" Type="varchar(max)" Nullable="false" />
+          <Property Name="OfficeTelephone" Type="varchar" MaxLength="38" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="38" Nullable="false" />
+          <Property Name="BPSId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModfiedOn" Type="date" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="phaConfigurations">
+          <Key>
+            <PropertyRef Name="ConfigKey" />
+          </Key>
+          <Property Name="ConfigKey" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigValue" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PojectUnits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PojectId" Type="int" Nullable="false" />
+          <Property Name="UnitNumber" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="150" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ProjectLocation" Type="nvarchar" MaxLength="250" />
+          <Property Name="ProjectTypeId" Type="int" />
+          <Property Name="TotalApplicableUnits" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="350" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="date" />
+          <Property Name="LastModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProjectTypeConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PojectTypeId" Type="int" Nullable="false" />
+          <Property Name="AttributeTypeId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedOn" Type="date" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectUnitAttributes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UnitId" Type="int" Nullable="false" />
+          <Property Name="AttributeId" Type="int" Nullable="false" />
+          <Property Name="AttributeValue" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="ModifiedOn" Type="date" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserActivities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="ClientDetail" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdentityId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="ProfilePic" Type="varchar" MaxLength="1500" />
+          <Property Name="FullName" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="WaitingMembers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="int" />
+          <Property Name="EventID" Type="int" />
+          <Property Name="ProjectID" Type="int" />
+        </EntityType>
+        <Association Name="FK__Balloting__Event__2739D489">
+          <End Role="Events" Type="Self.Events" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Balloting" Type="Self.Balloting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Balloting">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Balloting__Membe__282DF8C2">
+          <End Role="Members" Type="Self.Members" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Balloting" Type="Self.Balloting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Balloting">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Balloting__Proje__29221CFB">
+          <End Role="PojectUnits" Type="Self.PojectUnits" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Balloting" Type="Self.Balloting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PojectUnits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Balloting">
+              <PropertyRef Name="ProjectUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeTypes_AttributeDataTypes">
+          <End Role="AttributeDataTypes" Type="Self.AttributeDataTypes" Multiplicity="1" />
+          <End Role="AttributesTypes" Type="Self.AttributesTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeDataTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AttributesTypes">
+              <PropertyRef Name="DataTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Authentications_AppForms">
+          <End Role="AppForms" Type="Self.AppForms" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Authentications" Type="Self.Authentications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppForms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Authentications">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Authentications_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Authentications" Type="Self.Authentications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Authentications">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BPSProjects_BPSLists">
+          <End Role="BPSLists" Type="Self.BPSLists" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BPSProjects" Type="Self.BPSProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BPSLists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BPSProjects">
+              <PropertyRef Name="BPSId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BPSProjects_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BPSProjects" Type="Self.BPSProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BPSProjects">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_BPSLists">
+          <End Role="BPSLists" Type="Self.BPSLists" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BPSLists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="BPSId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PojectUnits_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PojectUnits" Type="Self.PojectUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PojectUnits">
+              <PropertyRef Name="PojectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_ProjectTypes">
+          <End Role="ProjectTypes" Type="Self.ProjectTypes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ProjectTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTypeConfiguration_AttributesTypes">
+          <End Role="AttributesTypes" Type="Self.AttributesTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectTypeConfiguration" Type="Self.ProjectTypeConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributesTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTypeConfiguration">
+              <PropertyRef Name="AttributeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTypeConfiguration_ProjectTypes">
+          <End Role="ProjectTypes" Type="Self.ProjectTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectTypeConfiguration" Type="Self.ProjectTypeConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTypeConfiguration">
+              <PropertyRef Name="PojectTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectUnitAttributes_AttributesTypes">
+          <End Role="AttributesTypes" Type="Self.AttributesTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectUnitAttributes" Type="Self.ProjectUnitAttributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributesTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectUnitAttributes">
+              <PropertyRef Name="AttributeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectUnitAttributes_PojectUnits">
+          <End Role="PojectUnits" Type="Self.PojectUnits" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectUnitAttributes" Type="Self.ProjectUnitAttributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PojectUnits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectUnitAttributes">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WaitingMembers_Events">
+          <End Role="Events" Type="Self.Events" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WaitingMembers" Type="Self.WaitingMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WaitingMembers">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WaitingMembers_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WaitingMembers" Type="Self.WaitingMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WaitingMembers">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WaitingMembers_Project">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WaitingMembers" Type="Self.WaitingMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WaitingMembers">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="phaBallotingModelStoreContainer">
+          <EntitySet Name="AppForms" EntityType="Self.AppForms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttributeDataTypes" EntityType="Self.AttributeDataTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttributesTypes" EntityType="Self.AttributesTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Authentications" EntityType="Self.Authentications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Balloting" EntityType="Self.Balloting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BPSGroup" EntityType="Self.BPSGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BPSLists" EntityType="Self.BPSLists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BPSProjects" EntityType="Self.BPSProjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="phaConfigurations" EntityType="Self.phaConfigurations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PojectUnits" EntityType="Self.PojectUnits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectTypeConfiguration" EntityType="Self.ProjectTypeConfiguration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectTypes" EntityType="Self.ProjectTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectUnitAttributes" EntityType="Self.ProjectUnitAttributes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserActivities" EntityType="Self.UserActivities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WaitingMembers" EntityType="Self.WaitingMembers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Balloting__Event__2739D489" Association="Self.FK__Balloting__Event__2739D489">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="Balloting" EntitySet="Balloting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Balloting__Membe__282DF8C2" Association="Self.FK__Balloting__Membe__282DF8C2">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Balloting" EntitySet="Balloting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Balloting__Proje__29221CFB" Association="Self.FK__Balloting__Proje__29221CFB">
+            <End Role="PojectUnits" EntitySet="PojectUnits" />
+            <End Role="Balloting" EntitySet="Balloting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeTypes_AttributeDataTypes" Association="Self.FK_AttributeTypes_AttributeDataTypes">
+            <End Role="AttributeDataTypes" EntitySet="AttributeDataTypes" />
+            <End Role="AttributesTypes" EntitySet="AttributesTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Authentications_AppForms" Association="Self.FK_Authentications_AppForms">
+            <End Role="AppForms" EntitySet="AppForms" />
+            <End Role="Authentications" EntitySet="Authentications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Authentications_AspNetRoles" Association="Self.FK_Authentications_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="Authentications" EntitySet="Authentications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BPSProjects_BPSLists" Association="Self.FK_BPSProjects_BPSLists">
+            <End Role="BPSLists" EntitySet="BPSLists" />
+            <End Role="BPSProjects" EntitySet="BPSProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BPSProjects_Projects" Association="Self.FK_BPSProjects_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="BPSProjects" EntitySet="BPSProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_BPSLists" Association="Self.FK_Members_BPSLists">
+            <End Role="BPSLists" EntitySet="BPSLists" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PojectUnits_Projects" Association="Self.FK_PojectUnits_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="PojectUnits" EntitySet="PojectUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_ProjectTypes" Association="Self.FK_Projects_ProjectTypes">
+            <End Role="ProjectTypes" EntitySet="ProjectTypes" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTypeConfiguration_AttributesTypes" Association="Self.FK_ProjectTypeConfiguration_AttributesTypes">
+            <End Role="AttributesTypes" EntitySet="AttributesTypes" />
+            <End Role="ProjectTypeConfiguration" EntitySet="ProjectTypeConfiguration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTypeConfiguration_ProjectTypes" Association="Self.FK_ProjectTypeConfiguration_ProjectTypes">
+            <End Role="ProjectTypes" EntitySet="ProjectTypes" />
+            <End Role="ProjectTypeConfiguration" EntitySet="ProjectTypeConfiguration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectUnitAttributes_AttributesTypes" Association="Self.FK_ProjectUnitAttributes_AttributesTypes">
+            <End Role="AttributesTypes" EntitySet="AttributesTypes" />
+            <End Role="ProjectUnitAttributes" EntitySet="ProjectUnitAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectUnitAttributes_PojectUnits" Association="Self.FK_ProjectUnitAttributes_PojectUnits">
+            <End Role="PojectUnits" EntitySet="PojectUnits" />
+            <End Role="ProjectUnitAttributes" EntitySet="ProjectUnitAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WaitingMembers_Events" Association="Self.FK_WaitingMembers_Events">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="WaitingMembers" EntitySet="WaitingMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WaitingMembers_Members" Association="Self.FK_WaitingMembers_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="WaitingMembers" EntitySet="WaitingMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WaitingMembers_Project" Association="Self.FK_WaitingMembers_Project">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="WaitingMembers" EntitySet="WaitingMembers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="phaBallotingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="phaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppForms" EntityType="phaBallotingModel.AppForm" />
+          <EntitySet Name="AspNetRoles" EntityType="phaBallotingModel.AspNetRole" />
+          <EntitySet Name="AttributeDataTypes" EntityType="phaBallotingModel.AttributeDataType" />
+          <EntitySet Name="AttributesTypes" EntityType="phaBallotingModel.AttributesType" />
+          <EntitySet Name="Authentications" EntityType="phaBallotingModel.Authentication" />
+          <EntitySet Name="Ballotings" EntityType="phaBallotingModel.Balloting" />
+          <EntitySet Name="BPSGroups" EntityType="phaBallotingModel.BPSGroup" />
+          <EntitySet Name="BPSLists" EntityType="phaBallotingModel.BPSList" />
+          <EntitySet Name="BPSProjects" EntityType="phaBallotingModel.BPSProject" />
+          <EntitySet Name="Events" EntityType="phaBallotingModel.Event" />
+          <EntitySet Name="Members" EntityType="phaBallotingModel.Member" />
+          <EntitySet Name="phaConfigurations" EntityType="phaBallotingModel.phaConfiguration" />
+          <EntitySet Name="PojectUnits" EntityType="phaBallotingModel.PojectUnit" />
+          <EntitySet Name="Projects" EntityType="phaBallotingModel.Project" />
+          <EntitySet Name="ProjectTypeConfigurations" EntityType="phaBallotingModel.ProjectTypeConfiguration" />
+          <EntitySet Name="ProjectTypes" EntityType="phaBallotingModel.ProjectType" />
+          <EntitySet Name="ProjectUnitAttributes" EntityType="phaBallotingModel.ProjectUnitAttribute" />
+          <EntitySet Name="UserActivities" EntityType="phaBallotingModel.UserActivity" />
+          <EntitySet Name="UserProfiles" EntityType="phaBallotingModel.UserProfile" />
+          <EntitySet Name="WaitingMembers" EntityType="phaBallotingModel.WaitingMember" />
+          <AssociationSet Name="FK_Authentications_AppForms" Association="phaBallotingModel.FK_Authentications_AppForms">
+            <End Role="AppForm" EntitySet="AppForms" />
+            <End Role="Authentication" EntitySet="Authentications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Authentications_AspNetRoles" Association="phaBallotingModel.FK_Authentications_AspNetRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="Authentication" EntitySet="Authentications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeTypes_AttributeDataTypes" Association="phaBallotingModel.FK_AttributeTypes_AttributeDataTypes">
+            <End Role="AttributeDataType" EntitySet="AttributeDataTypes" />
+            <End Role="AttributesType" EntitySet="AttributesTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTypeConfiguration_AttributesTypes" Association="phaBallotingModel.FK_ProjectTypeConfiguration_AttributesTypes">
+            <End Role="AttributesType" EntitySet="AttributesTypes" />
+            <End Role="ProjectTypeConfiguration" EntitySet="ProjectTypeConfigurations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectUnitAttributes_AttributesTypes" Association="phaBallotingModel.FK_ProjectUnitAttributes_AttributesTypes">
+            <End Role="AttributesType" EntitySet="AttributesTypes" />
+            <End Role="ProjectUnitAttribute" EntitySet="ProjectUnitAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Balloting__Event__2739D489" Association="phaBallotingModel.FK__Balloting__Event__2739D489">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Balloting" EntitySet="Ballotings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Balloting__Membe__282DF8C2" Association="phaBallotingModel.FK__Balloting__Membe__282DF8C2">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Balloting" EntitySet="Ballotings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Balloting__Proje__29221CFB" Association="phaBallotingModel.FK__Balloting__Proje__29221CFB">
+            <End Role="PojectUnit" EntitySet="PojectUnits" />
+            <End Role="Balloting" EntitySet="Ballotings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BPSProjects_BPSLists" Association="phaBallotingModel.FK_BPSProjects_BPSLists">
+            <End Role="BPSList" EntitySet="BPSLists" />
+            <End Role="BPSProject" EntitySet="BPSProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_BPSLists" Association="phaBallotingModel.FK_Members_BPSLists">
+            <End Role="BPSList" EntitySet="BPSLists" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BPSProjects_Projects" Association="phaBallotingModel.FK_BPSProjects_Projects">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="BPSProject" EntitySet="BPSProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WaitingMembers_Events" Association="phaBallotingModel.FK_WaitingMembers_Events">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="WaitingMember" EntitySet="WaitingMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WaitingMembers_Members" Association="phaBallotingModel.FK_WaitingMembers_Members">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="WaitingMember" EntitySet="WaitingMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PojectUnits_Projects" Association="phaBallotingModel.FK_PojectUnits_Projects">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="PojectUnit" EntitySet="PojectUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectUnitAttributes_PojectUnits" Association="phaBallotingModel.FK_ProjectUnitAttributes_PojectUnits">
+            <End Role="PojectUnit" EntitySet="PojectUnits" />
+            <End Role="ProjectUnitAttribute" EntitySet="ProjectUnitAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_ProjectTypes" Association="phaBallotingModel.FK_Projects_ProjectTypes">
+            <End Role="ProjectType" EntitySet="ProjectTypes" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WaitingMembers_Project" Association="phaBallotingModel.FK_WaitingMembers_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="WaitingMember" EntitySet="WaitingMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTypeConfiguration_ProjectTypes" Association="phaBallotingModel.FK_ProjectTypeConfiguration_ProjectTypes">
+            <End Role="ProjectType" EntitySet="ProjectTypes" />
+            <End Role="ProjectTypeConfiguration" EntitySet="ProjectTypeConfigurations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AppForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FormName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Authentications" Relationship="phaBallotingModel.FK_Authentications_AppForms" FromRole="AppForm" ToRole="Authentication" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Authentications" Relationship="phaBallotingModel.FK_Authentications_AspNetRoles" FromRole="AspNetRole" ToRole="Authentication" />
+        </EntityType>
+        <EntityType Name="AttributeDataType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DataTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DataType" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AttributesTypes" Relationship="phaBallotingModel.FK_AttributeTypes_AttributeDataTypes" FromRole="AttributeDataType" ToRole="AttributesType" />
+        </EntityType>
+        <EntityType Name="AttributesType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttributeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="DataTypeId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AttributeDataType" Relationship="phaBallotingModel.FK_AttributeTypes_AttributeDataTypes" FromRole="AttributesType" ToRole="AttributeDataType" />
+          <NavigationProperty Name="ProjectTypeConfigurations" Relationship="phaBallotingModel.FK_ProjectTypeConfiguration_AttributesTypes" FromRole="AttributesType" ToRole="ProjectTypeConfiguration" />
+          <NavigationProperty Name="ProjectUnitAttributes" Relationship="phaBallotingModel.FK_ProjectUnitAttributes_AttributesTypes" FromRole="AttributesType" ToRole="ProjectUnitAttribute" />
+        </EntityType>
+        <EntityType Name="Authentication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FormId" Type="Int32" Nullable="false" />
+          <Property Name="ViewRecords" Type="Boolean" />
+          <Property Name="EditRecords" Type="Boolean" />
+          <Property Name="DeleteRecords" Type="Boolean" />
+          <Property Name="AddRecords" Type="Boolean" />
+          <NavigationProperty Name="AppForm" Relationship="phaBallotingModel.FK_Authentications_AppForms" FromRole="Authentication" ToRole="AppForm" />
+          <NavigationProperty Name="AspNetRole" Relationship="phaBallotingModel.FK_Authentications_AspNetRoles" FromRole="Authentication" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="Balloting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="ProjectUnitID" Type="Int32" Nullable="false" />
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="phaBallotingModel.FK__Balloting__Event__2739D489" FromRole="Balloting" ToRole="Event" />
+          <NavigationProperty Name="Member" Relationship="phaBallotingModel.FK__Balloting__Membe__282DF8C2" FromRole="Balloting" ToRole="Member" />
+          <NavigationProperty Name="PojectUnit" Relationship="phaBallotingModel.FK__Balloting__Proje__29221CFB" FromRole="Balloting" ToRole="PojectUnit" />
+        </EntityType>
+        <EntityType Name="BPSGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="BPSGroup1" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="BPSList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BPS" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BPSProjects" Relationship="phaBallotingModel.FK_BPSProjects_BPSLists" FromRole="BPSList" ToRole="BPSProject" />
+          <NavigationProperty Name="Members" Relationship="phaBallotingModel.FK_Members_BPSLists" FromRole="BPSList" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="BPSProject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="BPSId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BPSList" Relationship="phaBallotingModel.FK_BPSProjects_BPSLists" FromRole="BPSProject" ToRole="BPSList" />
+          <NavigationProperty Name="Project" Relationship="phaBallotingModel.FK_BPSProjects_Projects" FromRole="BPSProject" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="EventLocation" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastModifiedOn" Type="DateTime" Precision="0" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Ballotings" Relationship="phaBallotingModel.FK__Balloting__Event__2739D489" FromRole="Event" ToRole="Balloting" />
+          <NavigationProperty Name="WaitingMembers" Relationship="phaBallotingModel.FK_WaitingMembers_Events" FromRole="Event" ToRole="WaitingMember" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OldMFormNo" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NameOfOfficer" Type="String" Nullable="false" MaxLength="530" FixedLength="false" Unicode="false" />
+          <Property Name="FatherName" Type="String" Nullable="false" MaxLength="530" FixedLength="false" Unicode="false" />
+          <Property Name="HusbandName" Type="String" Nullable="false" MaxLength="530" FixedLength="false" Unicode="false" />
+          <Property Name="Cnic" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="OfficeName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="OfficeStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfJoiningService" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PostHeld" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OccutionalGroup" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OfficeAddress" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PermanentAddress" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="HomeTelephone" Type="String" Nullable="false" MaxLength="38" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ImageUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OfficeTelephone" Type="String" Nullable="false" MaxLength="38" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="38" FixedLength="false" Unicode="false" />
+          <Property Name="BPSId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModfiedOn" Type="DateTime" Precision="0" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Ballotings" Relationship="phaBallotingModel.FK__Balloting__Membe__282DF8C2" FromRole="Member" ToRole="Balloting" />
+          <NavigationProperty Name="BPSList" Relationship="phaBallotingModel.FK_Members_BPSLists" FromRole="Member" ToRole="BPSList" />
+          <NavigationProperty Name="WaitingMembers" Relationship="phaBallotingModel.FK_WaitingMembers_Members" FromRole="Member" ToRole="WaitingMember" />
+        </EntityType>
+        <EntityType Name="phaConfiguration">
+          <Key>
+            <PropertyRef Name="ConfigKey" />
+          </Key>
+          <Property Name="ConfigKey" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConfigValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PojectUnit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PojectId" Type="Int32" Nullable="false" />
+          <Property Name="UnitNumber" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Ballotings" Relationship="phaBallotingModel.FK__Balloting__Proje__29221CFB" FromRole="PojectUnit" ToRole="Balloting" />
+          <NavigationProperty Name="Project" Relationship="phaBallotingModel.FK_PojectUnits_Projects" FromRole="PojectUnit" ToRole="Project" />
+          <NavigationProperty Name="ProjectUnitAttributes" Relationship="phaBallotingModel.FK_ProjectUnitAttributes_PojectUnits" FromRole="PojectUnit" ToRole="ProjectUnitAttribute" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectLocation" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectTypeId" Type="Int32" />
+          <Property Name="TotalApplicableUnits" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastModifiedOn" Type="DateTime" Precision="0" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="BPSProjects" Relationship="phaBallotingModel.FK_BPSProjects_Projects" FromRole="Project" ToRole="BPSProject" />
+          <NavigationProperty Name="PojectUnits" Relationship="phaBallotingModel.FK_PojectUnits_Projects" FromRole="Project" ToRole="PojectUnit" />
+          <NavigationProperty Name="ProjectType" Relationship="phaBallotingModel.FK_Projects_ProjectTypes" FromRole="Project" ToRole="ProjectType" />
+          <NavigationProperty Name="WaitingMembers" Relationship="phaBallotingModel.FK_WaitingMembers_Project" FromRole="Project" ToRole="WaitingMember" />
+        </EntityType>
+        <EntityType Name="ProjectTypeConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PojectTypeId" Type="Int32" Nullable="false" />
+          <Property Name="AttributeTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AttributesType" Relationship="phaBallotingModel.FK_ProjectTypeConfiguration_AttributesTypes" FromRole="ProjectTypeConfiguration" ToRole="AttributesType" />
+          <NavigationProperty Name="ProjectType" Relationship="phaBallotingModel.FK_ProjectTypeConfiguration_ProjectTypes" FromRole="ProjectTypeConfiguration" ToRole="ProjectType" />
+        </EntityType>
+        <EntityType Name="ProjectType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Projects" Relationship="phaBallotingModel.FK_Projects_ProjectTypes" FromRole="ProjectType" ToRole="Project" />
+          <NavigationProperty Name="ProjectTypeConfigurations" Relationship="phaBallotingModel.FK_ProjectTypeConfiguration_ProjectTypes" FromRole="ProjectType" ToRole="ProjectTypeConfiguration" />
+        </EntityType>
+        <EntityType Name="ProjectUnitAttribute">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UnitId" Type="Int32" Nullable="false" />
+          <Property Name="AttributeId" Type="Int32" Nullable="false" />
+          <Property Name="AttributeValue" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AttributesType" Relationship="phaBallotingModel.FK_ProjectUnitAttributes_AttributesTypes" FromRole="ProjectUnitAttribute" ToRole="AttributesType" />
+          <NavigationProperty Name="PojectUnit" Relationship="phaBallotingModel.FK_ProjectUnitAttributes_PojectUnits" FromRole="ProjectUnitAttribute" ToRole="PojectUnit" />
+        </EntityType>
+        <EntityType Name="UserActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ClientDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdentityId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="ProfilePic" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="WaitingMember">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" />
+          <Property Name="EventID" Type="Int32" />
+          <Property Name="ProjectID" Type="Int32" />
+          <NavigationProperty Name="Event" Relationship="phaBallotingModel.FK_WaitingMembers_Events" FromRole="WaitingMember" ToRole="Event" />
+          <NavigationProperty Name="Member" Relationship="phaBallotingModel.FK_WaitingMembers_Members" FromRole="WaitingMember" ToRole="Member" />
+          <NavigationProperty Name="Project" Relationship="phaBallotingModel.FK_WaitingMembers_Project" FromRole="WaitingMember" ToRole="Project" />
+        </EntityType>
+        <Association Name="FK_Authentications_AppForms">
+          <End Type="phaBallotingModel.AppForm" Role="AppForm" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.Authentication" Role="Authentication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppForm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Authentication">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Authentications_AspNetRoles">
+          <End Type="phaBallotingModel.AspNetRole" Role="AspNetRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.Authentication" Role="Authentication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Authentication">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeTypes_AttributeDataTypes">
+          <End Type="phaBallotingModel.AttributeDataType" Role="AttributeDataType" Multiplicity="1" />
+          <End Type="phaBallotingModel.AttributesType" Role="AttributesType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeDataType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AttributesType">
+              <PropertyRef Name="DataTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTypeConfiguration_AttributesTypes">
+          <End Type="phaBallotingModel.AttributesType" Role="AttributesType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.ProjectTypeConfiguration" Role="ProjectTypeConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributesType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTypeConfiguration">
+              <PropertyRef Name="AttributeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectUnitAttributes_AttributesTypes">
+          <End Type="phaBallotingModel.AttributesType" Role="AttributesType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.ProjectUnitAttribute" Role="ProjectUnitAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributesType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectUnitAttribute">
+              <PropertyRef Name="AttributeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Balloting__Event__2739D489">
+          <End Type="phaBallotingModel.Event" Role="Event" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.Balloting" Role="Balloting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Balloting">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Balloting__Membe__282DF8C2">
+          <End Type="phaBallotingModel.Member" Role="Member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.Balloting" Role="Balloting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Balloting">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Balloting__Proje__29221CFB">
+          <End Type="phaBallotingModel.PojectUnit" Role="PojectUnit" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.Balloting" Role="Balloting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PojectUnit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Balloting">
+              <PropertyRef Name="ProjectUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BPSProjects_BPSLists">
+          <End Type="phaBallotingModel.BPSList" Role="BPSList" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.BPSProject" Role="BPSProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BPSList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BPSProject">
+              <PropertyRef Name="BPSId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_BPSLists">
+          <End Type="phaBallotingModel.BPSList" Role="BPSList" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BPSList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="BPSId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BPSProjects_Projects">
+          <End Type="phaBallotingModel.Project" Role="Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.BPSProject" Role="BPSProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BPSProject">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WaitingMembers_Events">
+          <End Type="phaBallotingModel.Event" Role="Event" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.WaitingMember" Role="WaitingMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WaitingMember">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WaitingMembers_Members">
+          <End Type="phaBallotingModel.Member" Role="Member" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.WaitingMember" Role="WaitingMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WaitingMember">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PojectUnits_Projects">
+          <End Type="phaBallotingModel.Project" Role="Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.PojectUnit" Role="PojectUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PojectUnit">
+              <PropertyRef Name="PojectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectUnitAttributes_PojectUnits">
+          <End Type="phaBallotingModel.PojectUnit" Role="PojectUnit" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.ProjectUnitAttribute" Role="ProjectUnitAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PojectUnit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectUnitAttribute">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_ProjectTypes">
+          <End Type="phaBallotingModel.ProjectType" Role="ProjectType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="ProjectTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WaitingMembers_Project">
+          <End Type="phaBallotingModel.Project" Role="Project" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.WaitingMember" Role="WaitingMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WaitingMember">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTypeConfiguration_ProjectTypes">
+          <End Type="phaBallotingModel.ProjectType" Role="ProjectType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.ProjectTypeConfiguration" Role="ProjectTypeConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTypeConfiguration">
+              <PropertyRef Name="PojectTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="phaBallotingModelStoreContainer" CdmEntityContainer="phaEntities">
+          <EntitySetMapping Name="AppForms">
+            <EntityTypeMapping TypeName="phaBallotingModel.AppForm">
+              <MappingFragment StoreEntitySet="AppForms">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="phaBallotingModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttributeDataTypes">
+            <EntityTypeMapping TypeName="phaBallotingModel.AttributeDataType">
+              <MappingFragment StoreEntitySet="AttributeDataTypes">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DataType" ColumnName="DataType" />
+                <ScalarProperty Name="DataTypeName" ColumnName="DataTypeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttributesTypes">
+            <EntityTypeMapping TypeName="phaBallotingModel.AttributesType">
+              <MappingFragment StoreEntitySet="AttributesTypes">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DataTypeId" ColumnName="DataTypeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AttributeName" ColumnName="AttributeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authentications">
+            <EntityTypeMapping TypeName="phaBallotingModel.Authentication">
+              <MappingFragment StoreEntitySet="Authentications">
+                <ScalarProperty Name="AddRecords" ColumnName="AddRecords" />
+                <ScalarProperty Name="DeleteRecords" ColumnName="DeleteRecords" />
+                <ScalarProperty Name="EditRecords" ColumnName="EditRecords" />
+                <ScalarProperty Name="ViewRecords" ColumnName="ViewRecords" />
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ballotings">
+            <EntityTypeMapping TypeName="phaBallotingModel.Balloting">
+              <MappingFragment StoreEntitySet="Balloting">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="ProjectUnitID" ColumnName="ProjectUnitID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BPSGroups">
+            <EntityTypeMapping TypeName="phaBallotingModel.BPSGroup">
+              <MappingFragment StoreEntitySet="BPSGroup">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BPSGroup1" ColumnName="BPSGroup" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BPSLists">
+            <EntityTypeMapping TypeName="phaBallotingModel.BPSList">
+              <MappingFragment StoreEntitySet="BPSLists">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BPS" ColumnName="BPS" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BPSProjects">
+            <EntityTypeMapping TypeName="phaBallotingModel.BPSProject">
+              <MappingFragment StoreEntitySet="BPSProjects">
+                <ScalarProperty Name="BPSId" ColumnName="BPSId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="phaBallotingModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="EventLocation" ColumnName="EventLocation" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="phaBallotingModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ModfiedOn" ColumnName="ModfiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BPSId" ColumnName="BPSId" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="OfficeTelephone" ColumnName="OfficeTelephone" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="HomeTelephone" ColumnName="HomeTelephone" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="OccutionalGroup" ColumnName="OccutionalGroup" />
+                <ScalarProperty Name="PostHeld" ColumnName="PostHeld" />
+                <ScalarProperty Name="DateOfJoiningService" ColumnName="DateOfJoiningService" />
+                <ScalarProperty Name="OfficeStatus" ColumnName="OfficeStatus" />
+                <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
+                <ScalarProperty Name="Cnic" ColumnName="Cnic" />
+                <ScalarProperty Name="HusbandName" ColumnName="HusbandName" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="NameOfOfficer" ColumnName="NameOfOfficer" />
+                <ScalarProperty Name="OldMFormNo" ColumnName="OldMFormNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="phaConfigurations">
+            <EntityTypeMapping TypeName="phaBallotingModel.phaConfiguration">
+              <MappingFragment StoreEntitySet="phaConfigurations">
+                <ScalarProperty Name="ConfigValue" ColumnName="ConfigValue" />
+                <ScalarProperty Name="ConfigKey" ColumnName="ConfigKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PojectUnits">
+            <EntityTypeMapping TypeName="phaBallotingModel.PojectUnit">
+              <MappingFragment StoreEntitySet="PojectUnits">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UnitNumber" ColumnName="UnitNumber" />
+                <ScalarProperty Name="PojectId" ColumnName="PojectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="phaBallotingModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TotalApplicableUnits" ColumnName="TotalApplicableUnits" />
+                <ScalarProperty Name="ProjectTypeId" ColumnName="ProjectTypeId" />
+                <ScalarProperty Name="ProjectLocation" ColumnName="ProjectLocation" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectTypeConfigurations">
+            <EntityTypeMapping TypeName="phaBallotingModel.ProjectTypeConfiguration">
+              <MappingFragment StoreEntitySet="ProjectTypeConfiguration">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AttributeTypeId" ColumnName="AttributeTypeId" />
+                <ScalarProperty Name="PojectTypeId" ColumnName="PojectTypeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectTypes">
+            <EntityTypeMapping TypeName="phaBallotingModel.ProjectType">
+              <MappingFragment StoreEntitySet="ProjectTypes">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectUnitAttributes">
+            <EntityTypeMapping TypeName="phaBallotingModel.ProjectUnitAttribute">
+              <MappingFragment StoreEntitySet="ProjectUnitAttributes">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AttributeValue" ColumnName="AttributeValue" />
+                <ScalarProperty Name="AttributeId" ColumnName="AttributeId" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserActivities">
+            <EntityTypeMapping TypeName="phaBallotingModel.UserActivity">
+              <MappingFragment StoreEntitySet="UserActivities">
+                <ScalarProperty Name="ClientDetail" ColumnName="ClientDetail" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="phaBallotingModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IdentityId" ColumnName="IdentityId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WaitingMembers">
+            <EntityTypeMapping TypeName="phaBallotingModel.WaitingMember">
+              <MappingFragment StoreEntitySet="WaitingMembers">
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

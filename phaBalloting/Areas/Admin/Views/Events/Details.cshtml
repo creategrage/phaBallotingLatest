@@ -1,0 +1,43 @@
+﻿@model phaBalloting.Data.Event
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Event</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Event Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Event Location")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Entry Date")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EntryDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

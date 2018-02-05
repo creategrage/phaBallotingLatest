@@ -1,0 +1,169 @@
+﻿@model IEnumerable<phaBalloting.Data.Event>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><i class="glyphicon glyphicon-cog"></i> Configuration</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <!-- start accordion -->
+                <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                        <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <h4 class="panel-title">Project attributes data types</h4>
+                        </a>
+                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <p> <a href="@Url.Action("Create","AttributeDataTypes",new { area="admin"})" class="ajaxload pull-right btn btn-info">Add New Record</a></p>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Name</th>
+                                            <th>Data type</th>
+                                            <th>Description</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                            var datatypes = new phaBalloting.Data.phaEntities().AttributeDataTypes.Where(w => !w.IsDeleted).ToList();
+                            int i = 1; foreach (var types in datatypes)
+                            {
+                                <tr>
+                                    <th scope="row">@i</th>
+                                    <td>@types.DataTypeName</td>
+                                    <td>@types.DataType</td>
+                                    <td>@types.Description</td>
+                                    <td>@Html.Raw(types.IsActive ? "<span class='label label-info'>Active</span>" : "<span class='label label-warning'>In active</span>")</td>
+                                    <td>
+
+                                        <a class="ajaxload" href="@Url.Action("Edit","AttributeDataTypes",new { id=types.Id, area="admin" })"><i class="fa fa-th-large fa-pencil-square-o"></i></a>  <a class="ajaxload" href="@Url.Action("Edit","AttributeDataTypes",new { id=types.Id, area="admin" })"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>}
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <a class="panel-heading" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h4 class="panel-title">Project attributes</h4>
+                        </a>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <p> <a href="@Url.Action("Create","AttributesTypes",new { area="admin"})" class="ajaxload pull-right btn btn-info">Add New Record</a></p>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Name</th>
+                                            <th>Data type</th>
+                                            <th>Description</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                            var attrtypes = new phaBalloting.Data.phaEntities().AttributesTypes.Where(w => !w.IsDeleted).ToList();
+                            i = 1; foreach (var types in attrtypes)
+                            {
+                                <tr>
+                                    <th scope="row">@i</th>
+                                    <td>@types.AttributeName</td>
+                                    <td>@types.AttributeDataType.DataTypeName</td>
+                                    <td>@types.Description</td>
+                                    <td>@Html.Raw(types.IsActive ? "<span class='label label-info'>Active</span>" : "<span class='label label-warning'>In active</span>")</td>
+                                    <td>
+
+                                        <a class="ajaxload" href="@Url.Action("Edit","AttributeTypes",new { id=types.Id, area="admin" })"><i class="fa fa-th-large fa-pencil-square-o"></i></a>  <a class="ajaxload" href="@Url.Action("Delete","AttributeTypes",new { id=types.Id, area="admin" })"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>}
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <a class="panel-heading" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <h4 class="panel-title">Setting the Waiting Percentage</h4>
+                        </a>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <p> <a href="@Url.Action("Create","phaConfigurations",new { area="admin"})" class="ajaxload pull-right btn btn-info">Add New Ballot</a></p>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr. No</th>
+                                            <th>Configuration Key</th>
+                                            <th>Configuration Value/th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                            var conftypes = new phaBalloting.Data.phaEntities().phaConfigurations.ToList();
+                            i = 1; foreach (var types in conftypes)
+                            {
+                                <tr>
+                                        <td>@i</td>
+                                    <td>@types.ConfigKey</td>
+                                    <td>@types.ConfigValue</td>
+                                    <td>
+
+                                        @*<a class="ajaxload" href="@Url.Action("Edit","BallotingWaitage",new { id=types.Id, area="admin" })"><i class="fa fa-th-large fa-pencil-square-o"></i></a>  <a class="ajaxload" href="@Url.Action("Delete","AttributeTypes",new { id=types.Id, area="admin" })"><i class="fa fa-trash-o"></i></a>*@
+                                    </td>
+                                </tr>}
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end of accordion -->
+                
+
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>
+@section Scripts{
+<script>
+    $('.ajaxload').on('click', function (e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+        $.get(url, function (data) { 
+            $('<div class="modal fade bs-example-modal-lg"><div class="modal-body">' + data + '</div></div>').modal('show');
+        console.log(data);
+        });
+    });
+</script>
+}

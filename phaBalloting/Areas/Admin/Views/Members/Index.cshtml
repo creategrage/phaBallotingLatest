@@ -1,136 +1,93 @@
-﻿@model IEnumerable<phaBallotting.Data.Member>
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<phaBalloting.Data.Member>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<div class="page-title">
+    <div class="title_left">
+        <h3>List of Members</h3>
+    </div>
+
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            @using (Html.BeginForm("Index", "Members", FormMethod.Get))
+    {<div class="input-group">
+            <input type="text" name="keywords" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Go!</button>
+            </span>
+        </div>}
+        </div>
+    </div>
+</div>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create",null,new { @class= "btn btn-info fa fa-adjust fa-plus-circle mb-4 pull-right" })
 </p>
+
+
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.OldMFormNo)
+            @Html.DisplayName("Old M Form No")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NameOfOfficer)
+            @Html.DisplayName("Name of Officer")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FatherName)
+            @Html.DisplayName("Father Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HusbandName)
+            @Html.DisplayName("BPS")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Cnic)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OfficeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OfficeStatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateOfJoiningService)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PostHeld)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OccutionalGroup)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateOfBirth)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OfficeAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PermanentAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HomeTelephone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmailAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OfficeTelephone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Mobile)
+            @Html.DisplayName("CNIC")
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.OldMFormNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NameOfOfficer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FatherName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HusbandName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cnic)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OfficeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OfficeStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateOfJoiningService)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostHeld)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OccutionalGroup)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateOfBirth)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OfficeAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PermanentAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HomeTelephone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmailAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OfficeTelephone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Mobile)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="5"> <b>Records not found </b></td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OldMFormNo)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.NameOfOfficer)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.FatherName)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.BPSList.BPS)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Cnic)
+                    </td>
+                    <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                    </tr>
+                }
+            }
 </table>
+@Html.PagedListPager(Model, pageNumber => Url.Action("Index", new
+{
+    pageNumber,
+    officerName = Request.QueryString["keywords"]
+}))

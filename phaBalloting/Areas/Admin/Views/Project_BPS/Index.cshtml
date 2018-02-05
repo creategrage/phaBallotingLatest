@@ -1,0 +1,46 @@
+﻿@model IEnumerable<phaBalloting.Data.BPSList>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>List of BPS Included in project Balloting</h3>
+    </div>
+
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            @using (Html.BeginForm("Index", "Project_BPS", FormMethod.Get))
+            {<div class="input-group">
+                    <input type="text" name="keywords" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">Go!</button>
+                    </span>
+                </div>}
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm()) { 
+<div class="form-horizontal">
+    <h4>BPSProject</h4>
+    <hr />
+    <div class="form-group">
+        @Html.Label("PId", "Project Id", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("PId", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("BPSId", "BPS", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @foreach (var bps in Model)
+            {
+                @Html.CheckBox(bps.BPS)<text> @bps.BPS</text>
+            }
+        </div>
+    </div>
+    <input type="submit" name="submit" value="Add" />
+</div>
+}

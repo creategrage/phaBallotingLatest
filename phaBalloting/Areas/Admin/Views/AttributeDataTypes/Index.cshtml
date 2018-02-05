@@ -1,0 +1,91 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<phaBalloting.Data.AttributeDataType>
+
+@{
+    ViewBag.Title = "Index";
+    if(Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>List of attributes data types</h3>
+    </div>
+
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            @using (Html.BeginForm("Index", "AttributeDataTypes", FormMethod.Get))
+            {<div class="input-group">
+                    <input type="text" name="keywords" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">Go!</button>
+                    </span>
+                </div>}
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Data Type Name")
+            </th>
+            <th>
+                @Html.DisplayName("Data Type")
+            </th>
+            <th>
+                @Html.DisplayName("Description")
+            </th>
+            <th>
+                @Html.DisplayName("IsActive")
+            </th>
+            <th></th>
+        </tr>
+        @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="4"> <b>Records not found </b></td>
+        </tr>
+}
+else
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+}
+}
+
+    </table>
+
+@Html.PagedListPager(Model, pageNumber => Url.Action("Index", new
+{
+    pageNumber,
+    Keywords = Request.QueryString["keywords"]
+}))

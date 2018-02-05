@@ -1,0 +1,40 @@
+﻿
+
+@{
+    ViewBag.Title = "Users In Role";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section breadcrumb
+{
+    <li class="breadcrumb-item"><a href="@Url.Action("Rolelist")">Roles</li>
+
+    <li class="breadcrumb-item active">Users In Roles</li>
+}
+<h2>Users In Role @ViewBag.rolename <a style="float:right;" class="btn btn-success" href="@Url.Action("AssignRole", new { role=ViewBag.rolename})">Add User in Role</a></h2>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int index = 1;}
+        @foreach (var user in (string[])ViewBag.users)
+        {
+            <tr>
+                <td>@index</td>
+                <td>@user</td>
+                <td>
+                    <a href="@Url.Action("UserDetails", new { username = user})">Detials</a> | <a href="@Url.Action("RemoveUserFromRole", new { username = user, rolename = ViewBag.rolename })">Remove</a>
+                </td>
+            </tr>
+            index++;
+        }
+
+    </tbody>
+</table>

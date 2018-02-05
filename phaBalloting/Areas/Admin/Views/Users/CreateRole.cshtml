@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "CreateRole";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@*@section breadcrumb
+{
+    <li class="breadcrumb-item"><a href="@Url.Action("Rolelist")">Roles</a></li>
+
+    <li class="breadcrumb-item active">Create Roles</li>
+}*@
+<h2>Create Role</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    <label>
+        Role
+    </label>
+    <p>
+        @{
+    string role = ViewBag.rolename;
+        }
+        @Html.TextBox("RoleName", role)
+    </p>
+    <p>
+        @Html.ValidationMessage("RoleName")
+    </p>
+    <input type="submit" />
+}

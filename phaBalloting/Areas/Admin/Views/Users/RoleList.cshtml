@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Roles";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@*@section breadcrumb
+{
+
+    <li class="breadcrumb-item active">List of Roles</li>
+}*@
+<div class="page-title">
+    <div class="title_left">
+        <h3>List of roles</h3>
+    </div>
+
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            @using (Html.BeginForm("Index", "ProjectTypes", FormMethod.Get))
+            {<div class="input-group">
+                    <input type="text" name="keywords" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">Go!</button>
+                    </span>
+                </div>}
+        </div>
+    </div>
+</div>
+<h2> <a style="float:right;" class="btn btn-success" href="@Url.Action("CreateRole")">Create Role</a></h2>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int index = 1;}
+        @foreach (var role in (string[])ViewBag.Roles)
+        {
+            <tr>
+                <td>@index</td>
+                <td>@role</td>
+                <td>
+                    <a href="@Url.Action("Authentications", new { role=role })" ><span><img src="~/Areas/Admin/assets/images/index.png" width="20" height="20"/></span> Privileges</a> | 
+                    <a href="@Url.Action("UsersInRole", new { role=role })"><span><img src="~/Areas/Admin/assets/images/userInRole.png" width="20" height="20" /></span> Users In role</a> |
+                    <a href="@Url.Action("AssignRole", new { role = role })"><span><img src="~/Areas/Admin/assets/images/addUser.png" width="20" height="20" /></span> Add Users In role</a> 
+                </td>
+            </tr>
+            index++;
+        }
+        
+    </tbody>
+</table>

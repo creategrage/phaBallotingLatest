@@ -1,0 +1,247 @@
+﻿@model phaBalloting.Areas.Admin.Models.ProjectViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Ajax.BeginForm("Edit", new AjaxOptions { UpdateTargetId = "StatusDiv", HttpMethod = "POST", LoadingElementId = "loader" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>New Project</h4>
+        <hr />
+        <style>
+            .loader {
+                display: none;
+                border: 16px solid #f3f3f3; /* Light grey */
+                border-top: 16px solid #3498db; /* Blue */
+                border-radius: 50%;
+                width: 120px;
+                height: 120px;
+                animation: spin 2s linear infinite;
+            }
+
+            @@keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+        <div id="loader" class="loader"></div>
+        <div id="StatusDiv" class="aler alert-info"></div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group row">
+            <div class="col-xs-12 col-sm-6">
+                @Html.LabelFor(model => model.ProjectName, "Project Name", htmlAttributes: new { @class = "col-xs-12" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                @Html.LabelFor(model => model.ProjectLocation, "Project Location", htmlAttributes: new { @class = "col-xs-12" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.ProjectLocation, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProjectLocation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-12 col-sm-6">
+                @Html.LabelFor(model => model.TotalApplicableUnits, "Total Applicable Units", htmlAttributes: new { @class = "col-xs-12" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.TotalApplicableUnits, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TotalApplicableUnits, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+
+                @Html.LabelFor(model => model.Description,"Description", htmlAttributes: new { @class = "col-xs-12" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-12 col-sm-6">
+                @Html.LabelFor(model => model.ProjectTypeId, "Project Type Id", htmlAttributes: new { @class = "col-xs-12" })
+                <div class="col-12 col-sm-8 col-md-6">
+                    @Html.DropDownList("ProjectTypeId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ProjectTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div id="attributes">
+
+            @foreach (var unit in Model.Units)
+    {
+            <div class="row">
+                <div class="col-xs-12 col-sm-6" style="max-width:20px;">
+                    <span class="sno">@unit.UnitNumber</span>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <label class="col-xs-12" for="Description"> Description</label>
+                    <input class="form-control text-box single-line" id="description" name="description" type="text" value="@unit.Description">
+                </div>
+                @foreach (var attrib in unit.Attributes)
+    {
+                <div class="form-group col">
+                    <label class="col-xs-12" for="Description"> @attrib.key</label>
+                    <div class="col-md-10">
+                        <input type="hidden" name="unitNumber" class="sno" value="1" />
+                        <input class="form-control text-box single-line" id="attributeid" name="attributeid" type="hidden" value="@attrib.Id" required>
+
+                        <input class="form-control text-box single-line" id="attribute" name="attribute" type="text" value="@attrib.value" required>
+                    </div>
+                </div>
+                }
+            </div>
+            }
+        </div>
+        <div>
+            <div class="col-xs-12 col-sm-6">
+                <label>Add Lines</label>
+                <input id="attr-lines" type="number" />
+                <button type="button" id="attr-addlines">Add</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" id="asubmit-form" class="btn btn-default" />
+            </div>
+        </div>
+        </div>
+}
+
+<div id="sample" style="display:none;">
+
+    <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <label class="col-xs-12" for="Description"> #name#</label>
+        <div class="col-md-10">
+            <input type="hidden" name="unitNumber" class="sno" value="1" />
+            <input class="form-control text-box single-line" id="attributeid" name="attributeid" type="hidden" value="#id#" required>
+
+            <input class="form-control text-box single-line" id="attribute" name="attribute" type="text" value="" required>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            function ftt() {
+                alert('clicked');
+            }
+            var html = '';
+            $('#ProjectTypeId').on('change', function () {
+                $.get('/api/project-type/get-attributes/' + $(this).val()).success(function (data) {
+                    //console.log(data);
+                    //html = '<div  class="row"><div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="max-width:20px;"><span class="sno" >' + $('#attributes > .row').size() + '</span> </div ><div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><label class="col-xs-12" for="Description"> Description</label><input class="text-box single-line" id="description" name="description" type="text" value="" ></div >';
+                    html = '<div  class="row"><div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="max-width:20px;"><span class="sno" >' + $('#attributes > .row').size() + '</span> </div ><div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><label class="col-xs-12" for="Description"> Description</label><input class="form-control text-box single-line" id="description" name="description" type="text" value="" ></div >';
+                    $.each(data, function (key, item) {
+                        if (item.id != 'undefined') {
+                            html += $('#sample').html().replace('#name#', item.attributeName).replace('#id#', item.id);
+                        }
+                    });
+                    html += '</div>';
+                    $('#attributes').html(html);
+                });
+            });
+            if ($('#attributes').find('.row').size() < 0) {
+                $('#ProjectTypeId').trigger('change');
+            }
+            $('#attr-addlines').on('click', function () {
+                var count = 1;
+                count = $('#attr-lines').val();
+                if (count==' ' || count=='' || count == 'undefined')
+                    count = 1;
+                for (i = 0; i < count; i++) {
+                    var html2 = '<div class="row">' + $('#attributes').children('.row:first').html()
+                    html2 += ('<a href="#" class="removeattr badge badge-pill badge-danger" ><i class="fa fa-times">x</i></a>');
+                    $(html2).find('input').each(function () { $(this).val(''); });
+
+                    $('#attributes').append(html2);
+                }
+                var i = 1;
+                $('#attributes').find('.row').each(function () {
+                    $(this).find('.sno').each(function () { $(this).val(i); });
+                    i++;
+                });
+
+                $('.removeattr').on('click', function () {
+                    $(this).closest('.row').remove();
+                    var i = 1;
+                    $('#attributes').find('.row').each(function () {
+                        $(this).find('.sno').each(function () { $(this).val(i); });
+                        i++;
+                    });return false;
+                });
+            });
+
+            $('#submit-form-to-delete').on("click", function () {
+                var project = {}
+
+                project.ProjectName = $('input[name="ProjectName"]').val();
+                project.ProjectLocation = $('input[name="ProjectLocation"]').val();
+                project.ProjectTypeId = $('select[name="ProjectTypeId"]').val();
+                project.Description = $('input[name="Description"]').val();
+                project.TotalApplicableUnits = $('input[name="TotalApplicableUnits"]').val();
+                PojectUnits = {};
+                var ProjectUnitAttributes = [];
+                var unitIndex = 0;
+                $('#attributes').find('.row').each(function () {
+
+                    var number = $(this).find('input[name="unitNumber"]').val();
+                    var unit = {};
+                    unit.UnitNumber = number;
+
+                    var attrIndex = 0;
+
+                    $(this).find('.form-group').each(function () {
+                        var attributeid = $(this).find('input[name="attributeid"]').val();
+                        var attribute = $(this).find('input[name="attribute"]').val();
+                        var ProjectUnitAttributes = {};
+                        ProjectUnitAttributes.AttributeId = attributeid;
+                        ProjectUnitAttributes.AttributeValue = attribute;
+
+                        ProjectUnitAttributes[attrIndex] = ProjectUnitAttributes;
+                        attrIndex++;
+                    });
+                    PojectUnits[unitIndex] = unit;
+                    unitIndex++;
+
+                });
+
+                console.log(project);
+
+                var things = JSON.stringify({ project: project, projectUnits: PojectUnits, attributes: ProjectUnitAttributes });// JSON.stringify(project);
+                console.log(things);
+                $.ajax({
+                    url: '@Url.Action("Create", "Projects", new { area = "admin" })',
+                    type: "POST",
+                    data: things,
+                    dataType: 'json',
+                    contentType: 'application/json, charset=utf-8',
+                }).done(function (resp) {
+                    alert('Success ' + resp);
+                }).error(function (err) {
+                    alert("Error " + err.status);
+                });
+                return false;
+            });
+
+        });
+    </script>
+}

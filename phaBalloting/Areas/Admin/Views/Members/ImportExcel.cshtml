@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "ImportExcel";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Import Excel File</h2>
+@using (Html.BeginForm("ImportExcel","Members",FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Members File</h4>
+    <hr />
+    @Html.ValidationMessage("FormMessage", new { @class = "text-info" })
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("Upload File:", htmlAttributes: new { @class = "control-label col-xs-3" })
+        <div class="col-xs-9">
+            @Html.Editor("File", new { htmlAttributes = new { type = "file" } })
+            @Html.ValidationMessage("File", "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="">
+        <div class="col-xs-12 pr-3">
+            <input type="submit" value="Upload" class="pull-right btn btn-default" />
+        </div>
+    </div>
+
+</div>
+}
