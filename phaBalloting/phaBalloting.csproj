@@ -1,0 +1,644 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{830A397C-3F1C-45BF-91C5-50CA0AA6EBF4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>phaBalloting</RootNamespace>
+    <AssemblyName>phaBalloting</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\MembersController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\AdminAssets\css\custom.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\style.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\style.min.css" />
+    <Content Include="Areas\Admin\AdminAssets\img\avatars\1.jpg" />
+    <Content Include="Areas\Admin\AdminAssets\img\avatars\2.jpg" />
+    <Content Include="Areas\Admin\AdminAssets\img\avatars\3.jpg" />
+    <Content Include="Areas\Admin\AdminAssets\img\avatars\4.jpg" />
+    <Content Include="Areas\Admin\AdminAssets\img\avatars\5.jpg" />
+    <Content Include="Areas\Admin\AdminAssets\img\avatars\6.jpg" />
+    <Content Include="Areas\Admin\AdminAssets\img\avatars\7.jpg" />
+    <Content Include="Areas\Admin\AdminAssets\img\avatars\8.jpg" />
+    <Content Include="Areas\Admin\AdminAssets\img\avatars\default.jpg" />
+    <Content Include="Areas\Admin\AdminAssets\img\favicon.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Afghanistan.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\African Union.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Albania.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Algeria.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\American Samoa.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Andorra.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Angola.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Anguilla.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Antarctica.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Antigua &amp; Barbuda.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Arab League.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Argentina.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Armenia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Aruba.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\ASEAN.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Australia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Austria.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Azerbaijan.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Bahamas.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Bahrain.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Bangladesh.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Barbados.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Belarus.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Belgium.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Belize.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Benin.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Bermuda.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Bhutan.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Bolivia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Bosnia &amp; Herzegovina.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Botswana.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Brazil.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Brunei.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Bulgaria.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Burkina Faso.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Burundi.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Cambodja.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Cameroon.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Canada.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Cape Verde.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\CARICOM.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Cayman Islands.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Central African Republic.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Chad.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Chile.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\China.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\CIS.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Colombia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Commonwealth.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Comoros.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Congo-Brazzaville.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Congo-Kinshasa%28Zaire%29.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Cook Islands.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Costa Rica.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Cote d%27Ivoire.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Croatia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Cuba.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Cyprus.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Czech Republic.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Denmark.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Djibouti.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Dominica.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Dominican Republic.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Ecuador.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Egypt.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\El Salvador.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\England.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Equatorial Guinea.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Eritrea.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Estonia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Ethiopia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\European Union.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Faroes.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Fiji.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Finland.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\France.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Gabon.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Gambia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Georgia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Germany.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Ghana.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Gibraltar.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Greece.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Greenland.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Grenada.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Guadeloupe.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Guam.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Guatemala.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Guernsey.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Guinea-Bissau.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Guinea.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Guyana.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Haiti.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Honduras.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Hong Kong.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Hungary.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Iceland.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\India.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Indonezia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Iran.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Iraq.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Ireland.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Islamic Conference.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Isle of Man.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Israel.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Italy.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Jamaica.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Japan.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Jersey.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Jordan.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Kazakhstan.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Kenya.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Kiribati.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Kosovo.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Kuwait.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Kyrgyzstan.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Laos.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Latvia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Lebanon.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Lesotho.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Liberia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Libya.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Liechtenshein.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Lithuania.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Luxembourg.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Macao.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Macedonia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Madagascar.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Malawi.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Malaysia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Maldives.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Mali.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Malta.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Marshall Islands.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Martinique.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Mauritania.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Mauritius.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Mexico.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Micronesia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Moldova.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Monaco.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Mongolia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Montenegro.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Montserrat.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Morocco.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Mozambique.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Myanmar%28Burma%29.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Namibia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\NATO.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Nauru.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Nepal.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Netherlands Antilles.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Netherlands.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\New Caledonia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\New Zealand.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Nicaragua.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Niger.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Nigeria.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\North Korea.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Northern Cyprus.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Northern Ireland.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Norway.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Olimpic Movement.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Oman.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\OPEC.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Pakistan.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Palau.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Palestine.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Panama.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Papua New Guinea.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Paraguay.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Peru.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Philippines.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Poland.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Portugal.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Puerto Rico.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Qatar.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Red Cross.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Reunion.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Romania.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Russia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Rwanda.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Saint Lucia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Samoa.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\San Marino.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Sao Tome &amp; Principe.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Saudi Arabia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Scotland.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Senegal.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Serbia%28Yugoslavia%29.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Seychelles.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Sierra Leone.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Singapore.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Slovakia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Slovenia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Solomon Islands.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Somalia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Somaliland.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\South Africa.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\South Korea.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Spain.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Sri Lanka.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\St Kitts &amp; Nevis.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\St Vincent &amp; the Grenadines.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Sudan.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Suriname.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Swaziland.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Sweden.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Switzerland.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Syria.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Tahiti%28French Polinesia%29.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Taiwan.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Tajikistan.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Tanzania.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Thailand.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Timor-Leste.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Togo.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Tonga.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Trinidad &amp; Tobago.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Tunisia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Turkey.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Turkmenistan.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Turks and Caicos Islands.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Tuvalu.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Uganda.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Ukraine.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\United Arab Emirates.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\United Nations.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\United-Kingdom.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Uruguay.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\USA.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Uzbekistan.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Vanutau.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Vatican City.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Venezuela.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Viet Nam.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Virgin Islands British.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Virgin Islands US.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Wales.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Western Sahara.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Yemen.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Zambia.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\flags\Zimbabwe.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\logo-symbol.png" />
+    <Content Include="Areas\Admin\AdminAssets\img\logo.png" />
+    <Content Include="Areas\Admin\AdminAssets\js\app.js" />
+    <Content Include="Areas\Admin\AdminAssets\js\views\charts.js" />
+    <Content Include="Areas\Admin\AdminAssets\js\views\main.js" />
+    <Content Include="Areas\Admin\AdminAssets\js\views\widgets.js" />
+    <Content Include="Areas\Admin\AdminAssets\vendors\css\chart.css" />
+    <Content Include="Areas\Admin\AdminAssets\vendors\css\chart.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Members\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Members\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Members\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Members\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Members\Index.cshtml" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\core.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\utilities\_background.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\utilities\_borders.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\utilities\_display.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_animate.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_aside.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_avatars.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_badge.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_breadcrumb-menu.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_breadcrumb.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_buttons.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_callout.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_card.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_charts.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_dropdown-menu-right.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_dropdown.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_footer.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_grid.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_input-group.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_layout.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_loading.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_mixins.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_mobile.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_modal.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_nav.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_navbar.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_others.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_progress.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_rtl.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_sidebar.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_switches.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_tables.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_temp.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_typography.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_utilities.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_variables.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\core\_widgets.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\style.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\vendors\chart.js\chart.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\vendors\_variables.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\_bootstrap-variables.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\_core-variables.scss" />
+    <Content Include="Areas\Admin\AdminAssets\scss\_custom.scss" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\phaBallotting.Data\phaBallotting.Data.csproj">
+      <Project>{577f9e9d-e8ea-4def-a51e-7437a75ba56d}</Project>
+      <Name>phaBallotting.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49813</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49813/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

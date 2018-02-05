@@ -1,0 +1,21 @@
+﻿body {
+}
+
+fieldset ol li {
+    padding-bottom: 5px;
+    max-width: 50%;
+    float: left;
+    width: 50%;
+}
+
+fieldset ol li label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    min-width: 115px;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+fieldset ol li input {
+    border: 1px solid;
+}

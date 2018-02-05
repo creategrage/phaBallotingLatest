@@ -1,0 +1,163 @@
+﻿@model phaBallotting.Data.Member
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Member</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OldMFormNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OldMFormNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameOfOfficer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameOfOfficer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FatherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HusbandName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HusbandName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cnic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cnic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfficeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfficeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfficeStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfficeStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfJoiningService)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfJoiningService)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostHeld)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostHeld)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OccutionalGroup)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OccutionalGroup)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfficeAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfficeAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PermanentAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermanentAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeTelephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeTelephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfficeTelephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfficeTelephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mobile)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
