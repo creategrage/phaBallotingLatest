@@ -21,11 +21,13 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="wrap-input100 validate-input" data-validate="Enter username">
                 @Html.TextBoxFor(m => m.Email, new { @class = "input100", placeholder = "Username" })
+                @*<span class="focus-input100" data-placeholder="&#xf207;"></span>*@
                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
             </div>
 
             <div class="wrap-input100 validate-input" data-validate="Enter password">
                 @Html.PasswordFor(m => m.Password, new { @class = "input100", placeholder = "Password" })
+                @*<span class="focus-input100" ></span>*@
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
             </div>
 
@@ -46,7 +48,6 @@
         </form>
         }    </div>
 </div>
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

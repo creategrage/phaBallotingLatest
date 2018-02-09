@@ -3924,8 +3924,12 @@
     <Content Include="Areas\Admin\assets\vendors\validator\validator.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\head-pha.png" />
+    <Content Include="Content\images\PHA_logo.png" />
     <Content Include="Content\images\processing.gif" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery_002.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
