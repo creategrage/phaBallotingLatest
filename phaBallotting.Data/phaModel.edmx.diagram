@@ -43,6 +43,8 @@
         <AssociationConnector Association="phaBallotingModel.FK_Projects_ProjectTypes" />
         <AssociationConnector Association="phaBallotingModel.FK_WaitingMembers_Project" />
         <AssociationConnector Association="phaBallotingModel.FK_ProjectTypeConfiguration_ProjectTypes" />
+        <EntityTypeShape EntityType="phaBallotingModel.CancelledBalloting" Width="1.5" PointX="12.75" PointY="15.5" />
+        <AssociationConnector Association="phaBallotingModel.FK_CancelledBallotings_Balloting" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

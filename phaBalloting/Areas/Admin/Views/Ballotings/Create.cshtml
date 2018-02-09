@@ -1,30 +1,115 @@
-﻿@model phaBalloting.Data.Balloting
+﻿
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Create</h2>
 
-@using (Html.BeginForm("Create", "Ballotings", FormMethod.Post))
+
+@using (Ajax.BeginForm("Create", "Ballotings", new AjaxOptions { Confirm = "Are you sure to continue?", LoadingElementId = "loader", OnBegin="beginAjax" }))
 {
+    @Html.Hidden("BallotingType")
+    <div class="center-margin col-sm-8 position-relative" style="padding-top: 70px;">
+        <div class="row">
+            <h2 class="alert alert-success col-xs-12">Balloting</h2>
+            <div class="col-xs-12">
+                <span class="error" id="error text-danger"></span>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <label class="control-label">Select Event</label>
+                @Html.DropDownList("EventID", null, "--Select Event--", htmlAttributes: new { @class = "form-control", required = "required" })
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <label class="control-label">Select Project</label>
+                @Html.DropDownList("ProjectID", null, "--Select Project--", htmlAttributes: new { @class = "form-control", required = "required" })
 
-    @*<b>Enter the Percentage for Waiting:</b>
-    <input type="text" name="SelectPercent" />
-    <br />*@
-    <b>Select the Event ID:</b>
-    @Html.DropDownList("EventID", null, "--Select Event--", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="col-xs-12" style="margin-top:15px;">
+                <button type="submit" name="submit" class="btn-ballot btn-run btn btn-primary pull-right disabled"><i class="fa fa-hourglass-start"></i> Run Balloting </button>
+                <button type="submit" name="submit" class="btn-ballot btn-re-run btn btn-primary pull-right disabled"><i class="fa fa-hourglass-start"></i> Re-Run Balloting</button>
+                <button type="submit" name="submit" class="btn-ballot btn-run-waiting btn btn-primary pull-right disabled"><i class="fa fa-hourglass-start"></i> Run Balloting for waiting list</button>
 
-    <b> Select Project to be Balloting: </b>
-    @Html.DropDownList("ProjectID", null, "--Select Project--", htmlAttributes: new { @class = "form-control" })
+                <a href="@Url.Action("Index")" class="btn btn-info pull-left"><i class="fa fa-chevron-circle-left"></i> Back to List</a>
+            </div>
+        </div>
 
-    @*@Html.EditorFor("Percent", htmlAttributes: new { @class = "form-control" } )*@
-    
-    <input type="submit" name="submit" value="Run Ballot" />
+    </div>
 }
-
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div id="loader" class="position-absolute popover">
+    <img src="~/Content/images/processing.gif" />
 </div>
+@section scripts{
+    <script>
+        $('.btn-ballot').on('click', function (event) {
+
+            if ($(this).hasClass('disabled')) {
+                $('#error').html('Please select a valid balloting type.');
+                event.preventDefault();
+                return false;
+            }
+        });
+        function beginAjax() {
+            $('#error').html('');
+            var type = $('#BallotingType').val();
+
+            if (type == '@phaBalloting.Helpers.EnumManager.ballotinTypes.run.ToString()' || type == '@phaBalloting.Helpers.EnumManager.ballotinTypes.rerun.ToString()' || type == '@phaBalloting.Helpers.EnumManager.ballotinTypes.runwaiting.ToString()') {
+
+            }
+            else {
+                $('#error').html('Please select a valid balloting type.');
+            }
+        }
+        $('#ProjectID').on('change', function () {
+            $('#error').html('');
+        });
+        $('#ProjectID').on('change', function () {
+
+            $('#error').html('');
+            url = '/api/balloting/get-events-status-for-project/' + $('#EventID').val() + '/' + $(this).val();
+
+            $.get(url).done(function (data) {
+
+                if (data) {
+                    if (data == 'no-project' || data == 'no-event' || data == 'no-unit') {
+                        var message = "";
+                        $('.btn-run').addClass('disabled');
+                        $('.btn-re-run').addClass('disabled');
+                        $('.btn-run-waiting').addClass('disabled');
+                        if (data == 'no-project') {
+                            message = 'Please select a valid project for balloting.';
+                        }
+                        else if (data == 'no-event') {
+                            message = 'Please select a valid project for balloting.';
+                        }
+                        else if (data == 'no-unit') {
+                            message = 'Selected project has zero applicable units. Add atleast one applicable unit to continue.';
+                        }
+                        $('#error').html(message);
+                    }
+                    else {
+                        $('#BallotingType').val(data);
+                        if (data == '@phaBalloting.Helpers.EnumManager.ballotinTypes.run.ToString()') {
+                            $('.btn-run').removeClass('disabled');
+                            $('.btn-re-run').addClass('disabled');
+                            $('.btn-run-waiting').addClass('disabled');
+
+                        }
+                        else if (data == '@phaBalloting.Helpers.EnumManager.ballotinTypes.rerun.ToString()') {
+
+                            $('.btn-run').addClass('disabled');
+                            $('.btn-re-run').removeClass('disabled');
+                            $('.btn-run-waiting').addClass('disabled');
+                        }
+                        else if (data == '@phaBalloting.Helpers.EnumManager.ballotinTypes.runwaiting.ToString()') {
+
+                            $('.btn-run').addClass('disabled');
+                            $('.btn-re-run').addClass('disabled');
+                            $('.btn-run-waiting').removeClass('disabled');
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

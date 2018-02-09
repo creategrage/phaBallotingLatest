@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Backup";
+    if (Request.IsAjaxRequest()) {
+        Layout = null;
+    }
+    else
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    }
+}
+
+@using (Ajax.BeginForm("Backup",new AjaxOptions { Confirm="Are your sure to continue?", LoadingElementId= "globalloader", UpdateTargetId= "target" })) {
+    @Html.AntiForgeryToken()
+    <div id="target"></div>
+<button type="submit" class="btn btn-secondary"> <i class="fa fa-database"></i> Create Backup</button>
+}
+

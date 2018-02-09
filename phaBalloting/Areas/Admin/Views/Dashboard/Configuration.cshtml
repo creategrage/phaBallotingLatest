@@ -16,7 +16,7 @@
                     <li>
                         <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
-                    
+
                 </ul>
                 <div class="clearfix"></div>
             </div>
@@ -44,20 +44,20 @@
                                     </thead>
                                     <tbody>
                                         @{
-                            var datatypes = new phaBalloting.Data.phaEntities().AttributeDataTypes.Where(w => !w.IsDeleted).ToList();
-                            int i = 1; foreach (var types in datatypes)
-                            {
-                                <tr>
-                                    <th scope="row">@i</th>
-                                    <td>@types.DataTypeName</td>
-                                    <td>@types.DataType</td>
-                                    <td>@types.Description</td>
-                                    <td>@Html.Raw(types.IsActive ? "<span class='label label-info'>Active</span>" : "<span class='label label-warning'>In active</span>")</td>
-                                    <td>
+                                            var datatypes = new phaBalloting.Data.phaEntities().AttributeDataTypes.Where(w => !w.IsDeleted).ToList();
+                                            int i = 1; foreach (var types in datatypes)
+                                            {
+                                                <tr>
+                                                    <th scope="row">@i</th>
+                                                    <td>@types.DataTypeName</td>
+                                                    <td>@types.DataType</td>
+                                                    <td>@types.Description</td>
+                                                    <td>@Html.Raw(types.IsActive ? "<span class='label label-info'>Active</span>" : "<span class='label label-warning'>In active</span>")</td>
+                                                    <td>
 
-                                        <a class="ajaxload" href="@Url.Action("Edit","AttributeDataTypes",new { id=types.Id, area="admin" })"><i class="fa fa-th-large fa-pencil-square-o"></i></a>  <a class="ajaxload" href="@Url.Action("Edit","AttributeDataTypes",new { id=types.Id, area="admin" })"><i class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>}
+                                                        <a class="ajaxload" href="@Url.Action("Edit","AttributeDataTypes",new { id=types.Id, area="admin" })"><i class="fa fa-th-large fa-pencil-square-o"></i></a>  <a class="ajaxload" href="@Url.Action("Edit","AttributeDataTypes",new { id=types.Id, area="admin" })"><i class="fa fa-trash-o"></i></a>
+                                                    </td>
+                                                </tr>}
                                         }
 
                                     </tbody>
@@ -86,20 +86,20 @@
                                     </thead>
                                     <tbody>
                                         @{
-                            var attrtypes = new phaBalloting.Data.phaEntities().AttributesTypes.Where(w => !w.IsDeleted).ToList();
-                            i = 1; foreach (var types in attrtypes)
-                            {
-                                <tr>
-                                    <th scope="row">@i</th>
-                                    <td>@types.AttributeName</td>
-                                    <td>@types.AttributeDataType.DataTypeName</td>
-                                    <td>@types.Description</td>
-                                    <td>@Html.Raw(types.IsActive ? "<span class='label label-info'>Active</span>" : "<span class='label label-warning'>In active</span>")</td>
-                                    <td>
+                                            var attrtypes = new phaBalloting.Data.phaEntities().AttributesTypes.Where(w => !w.IsDeleted).ToList();
+                                            i = 1; foreach (var types in attrtypes)
+                                            {
+                                                <tr>
+                                                    <th scope="row">@i</th>
+                                                    <td>@types.AttributeName</td>
+                                                    <td>@types.AttributeDataType.DataTypeName</td>
+                                                    <td>@types.Description</td>
+                                                    <td>@Html.Raw(types.IsActive ? "<span class='label label-info'>Active</span>" : "<span class='label label-warning'>In active</span>")</td>
+                                                    <td>
 
-                                        <a class="ajaxload" href="@Url.Action("Edit","AttributeTypes",new { id=types.Id, area="admin" })"><i class="fa fa-th-large fa-pencil-square-o"></i></a>  <a class="ajaxload" href="@Url.Action("Delete","AttributeTypes",new { id=types.Id, area="admin" })"><i class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>}
+                                                        <a class="ajaxload" href="@Url.Action("Edit","AttributeTypes",new { id=types.Id, area="admin" })"><i class="fa fa-th-large fa-pencil-square-o"></i></a>  <a class="ajaxload" href="@Url.Action("Delete","AttributeTypes",new { id=types.Id, area="admin" })"><i class="fa fa-trash-o"></i></a>
+                                                    </td>
+                                                </tr>}
                                         }
 
                                     </tbody>
@@ -121,23 +121,23 @@
                                             <th>Sr. No</th>
                                             <th>Configuration Key</th>
                                             <th>Configuration Value/th>
-                                            
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @{
-                            var conftypes = new phaBalloting.Data.phaEntities().phaConfigurations.ToList();
-                            i = 1; foreach (var types in conftypes)
-                            {
-                                <tr>
-                                        <td>@i</td>
-                                    <td>@types.ConfigKey</td>
-                                    <td>@types.ConfigValue</td>
-                                    <td>
+                                            var conftypes = new phaBalloting.Data.phaEntities().phaConfigurations.ToList();
+                                            i = 1; foreach (var types in conftypes)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>@types.ConfigKey</td>
+                                                    <td>@types.ConfigValue</td>
+                                                    <td>
 
-                                        @*<a class="ajaxload" href="@Url.Action("Edit","BallotingWaitage",new { id=types.Id, area="admin" })"><i class="fa fa-th-large fa-pencil-square-o"></i></a>  <a class="ajaxload" href="@Url.Action("Delete","AttributeTypes",new { id=types.Id, area="admin" })"><i class="fa fa-trash-o"></i></a>*@
-                                    </td>
-                                </tr>}
+                                                        @*<a class="ajaxload" href="@Url.Action("Edit","BallotingWaitage",new { id=types.Id, area="admin" })"><i class="fa fa-th-large fa-pencil-square-o"></i></a>  <a class="ajaxload" href="@Url.Action("Delete","AttributeTypes",new { id=types.Id, area="admin" })"><i class="fa fa-trash-o"></i></a>*@
+                                                    </td>
+                                                </tr>}
                                         }
 
                                     </tbody>
@@ -146,9 +146,71 @@
                         </div>
                     </div>
 
+                    <div class="panel">
+                        <a class="panel-heading" role="tab" id="headingFour" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <h4 class="panel-title">Database backup and restore</h4>
+                        </a>
+                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h2 class="text-center"> Backup</h2>
+                                        @using (Ajax.BeginForm("Backup", "DBMaintanance", new AjaxOptions { Confirm = "Are your sure to continue?", LoadingElementId = "globalloader", UpdateTargetId = "target" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <div id="target" class="success text-center text-uppercase"></div>
+                                            <button type="submit" class="btn btn-primary"> <i class="fa fa-database"></i> Create Backup</button>
+                                        }
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <h2 class="text-center"> Restore</h2>
+                                        @using (Ajax.BeginForm("Restore", "DBMaintanance", new AjaxOptions { Confirm = "Are your sure to continue?", LoadingElementId = "globalloader", UpdateTargetId = "target2" }))
+    {
+                                    @Html.AntiForgeryToken()
+                                    <div id="target2" class="success text-center text-uppercase"></div>
+                                    <table class="table table-light">
+                                        <tbody>
+
+
+
+
+
+                                            @{var directore = System.IO.Directory.EnumerateFiles(Server.MapPath("~/Content/Backup"));
+            foreach (var file in directore)
+            {
+                var info = new System.IO.DirectoryInfo(file);
+                                            <tr>
+                                                <td>
+                                                    <label class="radio">
+                                                        <input type="radio" name="path" value="@info.Name" />@info.Name
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    Creation Date: @info.CreationTime.ToString("dd, MMMM yyyy hh:mm tt")
+                                                </td>
+                                                <td>
+                                                    Last Access: @info.LastAccessTime.ToString("dd, MMMM yyyy hh:mm tt")
+                                                </td>
+                                                <td>
+                                                    <a href="@file" download="@info.Name" target="_blank">Download</a>
+                                                </td>
+                                            </tr>
+}
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                    <div id="target" class="success text-center text-uppercase"></div>
+                                    <button type="submit" class="btn btn-primary"> <i class="fa fa-database"></i> Restore from Backup</button>
+}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- end of accordion -->
-                
+
 
             </div>
         </div>
@@ -156,14 +218,14 @@
     <!--/.col-->
 </div>
 @section Scripts{
-<script>
-    $('.ajaxload').on('click', function (e) {
-        e.preventDefault();
-        var url = $(this).attr('href');
-        $.get(url, function (data) { 
-            $('<div class="modal fade bs-example-modal-lg"><div class="modal-body">' + data + '</div></div>').modal('show');
-        console.log(data);
+    <script>
+        $('.ajaxload').on('click', function (e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            $.get(url, function (data) {
+                $('<div class="modal fade bs-example-modal-lg"><div class="modal-body">' + data + '</div></div>').modal('show');
+                console.log(data);
+            });
         });
-    });
-</script>
+    </script>
 }

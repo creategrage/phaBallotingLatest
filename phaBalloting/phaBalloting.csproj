@@ -250,6 +250,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BallotingsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DBMaintananceController.cs" />
     <Compile Include="Areas\Admin\Controllers\phaConfigurationsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectTypesController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
@@ -259,11 +260,13 @@
     <Compile Include="Areas\Admin\Controllers\AttributeDataTypesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AttributesTypesController.cs" />
     <Compile Include="Areas\Admin\Controllers\Project_BPSController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserActivitiesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\Models\AuthenticationModel.cs" />
     <Compile Include="Areas\Admin\Models\BallotingModel.cs" />
     <Compile Include="Areas\Admin\Models\ProjectViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\RDLC_Report.cs" />
     <Compile Include="Content\reports\phaDataSet.cs">
       <DependentUpon>phaDataSet.xsd</DependentUpon>
     </Compile>
@@ -280,6 +283,7 @@
     </Compile>
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\EnumManager.cs" />
+    <Compile Include="Helpers\DBMaintanance.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Helpers\XAuthrozie.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -288,6 +292,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="WebApi\BallotingController.cs" />
     <Compile Include="WebApi\ProjectTypeController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3919,6 +3924,8 @@
     <Content Include="Areas\Admin\assets\vendors\validator\validator.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\head-pha.png" />
+    <Content Include="Content\images\processing.gif" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -4879,16 +4886,14 @@
     <Content Include="Areas\Admin\Views\phaConfigurations\Details.cshtml" />
     <Content Include="Areas\Admin\Views\phaConfigurations\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\phaConfigurations\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\UserActivities\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\UserActivities\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\UserActivities\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\UserActivities\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\UserActivities\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Members\ImportExcel.cshtml" />
     <Content Include="Areas\Admin\Views\Projects\ImportExcel.cshtml" />
     <Content Include="Content\reports\phaDataSet.xsc">
       <DependentUpon>phaDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\DBMaintanance\Backup.cshtml" />
     <None Include="Content\reports\phaDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -4962,6 +4967,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\assets\MemberPhotos\" />
+    <Folder Include="Areas\Admin\Views\NewFolder1\" />
+    <Folder Include="Areas\Admin\Views\Reports\" />
+    <Folder Include="Content\Backup\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -4990,6 +4998,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Content\reports\MemberReport.rdlc" />
     <EmbeddedResource Include="Content\reports\SuccessfullReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>

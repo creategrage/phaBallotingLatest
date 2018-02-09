@@ -45,5 +45,6 @@ namespace phaBalloting.Data
         public virtual DbSet<UserActivity> UserActivities { get; set; }
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
         public virtual DbSet<WaitingMember> WaitingMembers { get; set; }
+        public virtual DbSet<CancelledBalloting> CancelledBallotings { get; set; }
     }
 }

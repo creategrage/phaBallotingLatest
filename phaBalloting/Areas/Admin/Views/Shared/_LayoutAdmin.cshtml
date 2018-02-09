@@ -70,106 +70,110 @@
 
 
                                 @if (phaBalloting.Helpers.EnumManager.Modules.Members.IsAuthrozed(EnumManager.Actions.Any))
-            {
-                    <li>
-                        <a><i class="fa fa-child"></i> Members<span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li>
-                                <a href="@Url.Action("Index", "Members")"><i class="icon-puzzle"></i> List of Members</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Create", "Members")"><i class="icon-puzzle"></i> Add New Member</a>
-                            </li>
-                        </ul>
-                    </li>
-}
+                                {
+                                    <li>
+                                        <a><i class="fa fa-child"></i> Members<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li>
+                                                <a href="@Url.Action("Index", "Members")"><i class="icon-puzzle"></i> List of Members</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Create", "Members")"><i class="icon-puzzle"></i> Add New Member</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
                                 @if (phaBalloting.Helpers.EnumManager.Modules.Events.IsAuthrozed(EnumManager.Actions.Any))
-            {
-                    <li>
-                        <a><i class="fa fa-table"></i> Events<span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li>
-                                <a href="@Url.Action("Index", "Events")"><i class="icon-puzzle"></i> List of Events</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Create", "Events")"><i class="icon-puzzle"></i> Add New Events</a>
-                            </li>
-                        </ul>
-                    </li>
-}
+                                {
+                                    <li>
+                                        <a><i class="fa fa-table"></i> Events<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li>
+                                                <a href="@Url.Action("Index", "Events")"><i class="icon-puzzle"></i> List of Events</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Create", "Events")"><i class="icon-puzzle"></i> Add New Events</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
 
 
 
 
                                 @if (phaBalloting.Helpers.EnumManager.Modules.ProjectType.IsAuthrozed(EnumManager.Actions.Any))
-            {
-                    <li>
-                        <a><i class="fa fa-recycle"></i>  Project Types<span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li>
-                                <a href="@Url.Action("Index", "ProjectTypes")"><i class="icon-puzzle"></i> List of Project Types</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Create", "ProjectTypes")"><i class="icon-puzzle"></i> Add New Project Types</a>
-                            </li>
-                        </ul>
-                    </li>
-}
+                                {
+                                    <li>
+                                        <a><i class="fa fa-recycle"></i>  Project Types<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li>
+                                                <a href="@Url.Action("Index", "ProjectTypes")"><i class="icon-puzzle"></i> List of Project Types</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Create", "ProjectTypes")"><i class="icon-puzzle"></i> Add New Project Types</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
                                 @if (phaBalloting.Helpers.EnumManager.Modules.Projects.IsAuthrozed(EnumManager.Actions.Any))
-            {
-                    <li>
-                        <a><i class="fa fa-life-ring"></i>  Projects<span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li>
-                                <a href="@Url.Action("Index", "Projects")"><i class="icon-puzzle"></i> List of Projects</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Create", "Projects")"><i class="icon-puzzle"></i> Add New Project</a>
-                            </li>
-                        </ul>
-                    </li>
-}
+                                {
+                                    <li>
+                                        <a><i class="fa fa-life-ring"></i>  Projects<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li>
+                                                <a href="@Url.Action("Index", "Projects")"><i class="icon-puzzle"></i> List of Projects</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Create", "Projects")"><i class="icon-puzzle"></i> Add New Project</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
                                 @if (phaBalloting.Helpers.EnumManager.Modules.Ballotings.IsAuthrozed(EnumManager.Actions.Any))
-            {
-                    <li>
-                        <a><i class="fa fa-language"></i>  Ballotings<span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li>
-                                <a href="@Url.Action("Index", "Ballotings")"><i class="icon-puzzle"></i> List of Ballotings</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Create", "Ballotings")"><i class="icon-puzzle"></i> Add New Ballotings</a>
-                            </li>
-                        </ul>
-                    </li>
-}
+                                {
+                                    <li>
+                                        <a><i class="fa fa-language"></i>  Ballotings<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+
+                                            <li>
+                                                <a href="@Url.Action("Create", "Ballotings")"><i class="icon-puzzle"></i> Ballotings</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Index", "Ballotings")"><i class="icon-puzzle"></i> Results of Ballotings</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Create", "Ballotings")"><i class="icon-puzzle"></i> Add New Ballotings</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
 
 
 
                             </ul>
                         </div>
                         @if (User.IsInRoleNew("Admin"))
-    {
-                        <div class="menu_section">
-                            <h3>Project Configuration</h3>
-                            <ul class="nav side-menu">
-                              
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Users", new { area = "admin" })"><i class="fa fa-user-plus"></i>Application Users</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("RoleList", "Users", new { area = "admin" })"><i class="fa fa-product-hunt"></i>Application Roles</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "UserActivities", new { area = "admin" })"><i class="fa fa-anchor"></i>User Activity</a>
-                            </li>
-                            </ul>
+                        {
+                            <div class="menu_section">
+                                <h3>Project Configuration</h3>
+                                <ul class="nav side-menu">
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Index", "Users", new { area = "admin" })"><i class="fa fa-user-plus"></i>Application Users</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("RoleList", "Users", new { area = "admin" })"><i class="fa fa-product-hunt"></i>Application Roles</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Index", "UserActivities", new { area = "admin" })"><i class="fa fa-anchor"></i>User Activity</a>
+                                    </li>
+                                </ul>
                             </div>
-                            }
+                        }
 
-                         
 
-                        </div>
+
+                    </div>
                     <!-- /sidebar menu -->
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small">
@@ -208,46 +212,46 @@
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
                                     <li><a href="@Url.Action("Details", new { username = User.Identity.Name })"> Profile</a></li>
                                     @* <li>
-            <a href="javascript:;">
-                <span class="badge bg-red pull-right">50%</span>
-                <span>Settings</span>
-            </a>
-        </li>*@
+                                            <a href="javascript:;">
+                                                <span class="badge bg-red pull-right">50%</span>
+                                                <span>Settings</span>
+                                            </a>
+                                        </li>*@
                                     <li><a href="javascript:;">Help</a></li>
                                     <li>
                                         @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", area = "" }))
-        {
-                                @Html.AntiForgeryToken()
-                                <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
-}
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                        }
                                         <a href="login.html"></a>
                                     </li>
                                 </ul>
                             </li>
 
                             @*<li role="presentation" class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-envelope-o"></i>
-                                    <span class="badge bg-green">6</span>
-                                </a>
-                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                                    <li>
-                                        <a>
-                                            <span class="image">
-                                                <img src="~/Areas/Admin/assets/images/img.jpg" alt="Profile Image"/>
-                                            </span>
-                                            <span>
-                                                <span>John Smith</span>
-                                                <span class="time">3 mins ago</span>
-                                            </span>
-                                            <span class="message">
-                                                Film festivals used to be do-or-die moments for movie makers. They were where...
-                                            </span>
-                                        </a>
-                                    </li>
-                                    
-                                </ul>
-                            </li>*@
+                                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-envelope-o"></i>
+                                        <span class="badge bg-green">6</span>
+                                    </a>
+                                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                        <li>
+                                            <a>
+                                                <span class="image">
+                                                    <img src="~/Areas/Admin/assets/images/img.jpg" alt="Profile Image"/>
+                                                </span>
+                                                <span>
+                                                    <span>John Smith</span>
+                                                    <span class="time">3 mins ago</span>
+                                                </span>
+                                                <span class="message">
+                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>*@
                         </ul>
                     </nav>
                 </div>
@@ -261,16 +265,25 @@
             <!-- footer content -->
             <footer>
                 @*<div class="pull-right">
-                    Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-                </div>*@
+                        Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                    </div>*@
                 <div class="clearfix"></div>
             </footer>
             <!-- /footer content -->
         </div>
     </div>
+    <div id="globalloader" style="display:none; position:absolute;left:0;top:0;bottom:0;right:0; background-color:rgba(0,0,0,.5);z-index:999999;">
+        <span class="spinner" style="display:table;height:100%; width:100%; ">
+            <span style="display:table-cell; vertical-align:middle;text-align:center;">
+                <i class="fa fa-5x fa-spinner fa-spin"></i>
+            </span>
+        </span>
+    </div>
 
     <!-- jQuery -->
     <script src="~/Areas/Admin/assets/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <!-- Bootstrap -->
     <script src="~/Areas/Admin/assets/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -307,7 +320,7 @@
     <script src="~/Areas/Admin/assets/js/custom.min.js"></script>
 
     <!-- bootstrap-daterangepicker -->
-    @RenderSection("Scripts",required:false)
+    @RenderSection("Scripts", required: false)
     <script>
         $(document).ready(function () {
             $('#birthday').daterangepicker({

@@ -11,70 +11,71 @@ namespace phaBalloting.Areas.Admin.Models
     public class BallotingModel
     {
         private phaEntities db = new phaEntities();
-        public bool AllocationBallots(List<Member> memberList, IEnumerable<PojectUnit> projectUnitList,double percentageToBeSet,int eventId)
+        public bool AllocationBallots(List<Member> memberList, IEnumerable<PojectUnit> projectUnitList, double percentageToBeSet, int eventId)
         {
-            int pid = 0;
 
-            try
+            int UnitCountToBallot = projectUnitList.Count();
+            List<Balloting> ToSave = new List<Balloting>();
+            foreach (var projectUnit in projectUnitList)
             {
-                List<Balloting> ballot = new List<Balloting>();
-                int j = projectUnitList.Count();
-
-                //int i = 0;
-
-                foreach (var pu in projectUnitList)
+                int i = 0;
+                while (i < UnitCountToBallot)
                 {
-                    int i = 0;
-                    while (i < j)
+                    Member randomMember = R.GetRandom(memberList);
+                    while (!this.MemeberExist(randomMember) && !ToSave.Any(x => x.MemberID == randomMember.Id))
                     {
-                        Member m = R.GetRandom(memberList);
-                        while (!this.MemeberExist(m))
-                        {
-                            Balloting b = new Balloting();
-                            pid = int.Parse(pu.PojectId.ToString());
-                            b.EventID = eventId;
-                            b.MemberID = m.Id;
-                            b.ProjectUnitID = pu.Id;
-                            ballot.Add(b);
-                            db.Ballotings.Add(b);
-                            db.SaveChanges();
-                            memberList.Remove(m);
-                            i = j;
-                        }
-
-                        i++;
+                        Balloting b = new Balloting();
+                        b.EventID = eventId;
+                        b.MemberID = randomMember.Id;
+                        b.ProjectUnitID = projectUnit.Id;
+                        ToSave.Add(b);
+                        memberList.Remove(randomMember);
+                        i = UnitCountToBallot;
                     }
 
+                    i++;
                 }
 
-                double percentage = percentageToBeSet * j;
+            }
+            try
+            {
+                db.Ballotings.AddRange(ToSave);
+                db.SaveChanges();
+
+                double percentage = percentageToBeSet * UnitCountToBallot;
 
                 double percentageTobeWaited = Math.Ceiling(percentage);
-
+                List<WaitingMember> ToSaveWaiting = new List<WaitingMember>();
                 for (int i = 0; i < percentageTobeWaited; i++)
                 {
                     Member member = R.GetRandom(memberList);
-                    
+
                     if (!db.WaitingMembers.ToList().Any(x => x.MemberID == member.Id))
                     {
                         WaitingMember waitingMember = new WaitingMember();
 
                         waitingMember.EventID = eventId;
-                        waitingMember.ProjectID = pid;
+                        waitingMember.ProjectID = projectUnitList.FirstOrDefault().PojectId;
                         waitingMember.MemberID = member.Id;
-
-                        db.WaitingMembers.Add(waitingMember);
-                        db.SaveChanges();
+                        ToSaveWaiting.Add(waitingMember);
                     }
                 }
+                try
+                {
+                    db.WaitingMembers.AddRange(ToSaveWaiting);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
 
-                return true;
+                }
             }
-            catch (Exception ex)
+            catch
             {
-                HttpContext.Current.Response.Write("Exception:" + ex.ToString());
             }
             return false;
+
         }
         public bool MemeberExist(Member member)
         {
@@ -82,7 +83,7 @@ namespace phaBalloting.Areas.Admin.Models
             {
                 return db.Ballotings.ToList().Any(x => x.MemberID == member.Id);
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
@@ -96,7 +97,7 @@ namespace phaBalloting.Areas.Admin.Models
                 return db.Ballotings.ToList().Any(x => x.ProjectUnitID == balloting.ProjectUnitID);
             }
 
-            catch (Exception ex)
+            catch
             {
                 return false;
             }

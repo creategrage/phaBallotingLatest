@@ -1,71 +1,255 @@
 ﻿@using PagedList.Mvc;
 @using PagedList;
 
-@model IPagedList<phaBalloting.Data.Balloting>
+@model System.Data.DataTable
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-}
+    string[] columnsToExclude = new string[] {"BallotingId", "EventName", "EventLocation", "ProjectName", "TypeName", "ProjectLocation", "TotalApplicableUnits", "EntryDate", "EventHeldDate" };
 
+}
+<div id="loader" style="display:none; position:absolute;left:0;top:0;bottom:0;right:0; background-color:rgba(0,0,0,.5);z-index:999999;">
+    <span class="spinner" style="display:table;height:100%; ">
+        <span style="display:table-cell; vertical-align:middle;text-align:center;"><i class="fa fa-5x fa-spinner fa-spin"></i>
+        </span>
+    </span>
+</div>
 <div class="page-title">
     <div class="title_left">
-        <h3>List of Balloting</h3>
+        <h3>Balloting Result</h3>
     </div>
 
     <div class="title_right">
         <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-            @using (Html.BeginForm("Index", "Ballotings", FormMethod.Get))
-            {<div class="input-group">
-                    <input type="text" name="keywords" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">Go!</button>
-                    </span>
-                </div>}
+
+            @using (Html.BeginForm("Index", "Ballotings", FormMethod.Post))
+    {
+                @Html.Hidden("ProjectID")
+                @Html.Hidden("EventID")
+                <select name="field" class="form-control">
+            <option value="dbo.Members.OldMFormNo">Form No</option>
+            <option value="dbo.Members.NameOfOfficer">Member name</option>
+            <option value="dbo.Members.Cnic">CNIC</option>
+        </select>
+        <div class="input-group">
+
+            <input type="text" name="keywords" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Go!</button>
+            </span>
+        </div>}
         </div>
     </div>
 </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Event Name")
-        </th>
-        <th>
-            @Html.DisplayName("Name of Officer")
-        </th>
-        <th>
-            @Html.DisplayName("Project Unit Number")
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
+<div class="form-horizontal">
+    @using (Html.BeginForm())
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Event.EventName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Member.NameOfOfficer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PojectUnit.UnitNumber)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+
+        <div class="form-group">
+            @Html.Label("Event Name", htmlAttributes: new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.DropDownList("EventID", null, new { @class = "form-control" })
+                @Html.ValidationMessage("EventId", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Project Name", htmlAttributes: new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @*@Html.DropDownList("ProjectID", null, new { @class = "form-control" })*@
+                <select id="ProjectID" name="ProjectID" class="form-control"></select>
+                @Html.ValidationMessage("ProjectId", new { @class = "text-danger" })
+            </div>
+        </div><div class="form-group">
+            <label class="control-label col-xs-12">.</label>
+            <button id="viewresult" type="submit" class="btn btn-small btn-info">View Results</button>
+           </div>
+              <div class="col-xs-12">
+                  <label class="control-label col-xs-12">.</label>
+                  @Html.ActionLink("Successfull Members Printable Report (pdf)", "SuccessFullMembers", "Reports", new { area = "admin", eventid = 0, projectId = 0, memberId = 0 }, new { @class = "btn-report btn btn-small btn-success pull-left", id = "btn-report" })
+                  @Html.ActionLink("Waiting List Printable Report (pdf)", "WaitingList", "Reports", new { area = "admin", eventid = 0, projectId = 0 }, new { @class = "btn-report btn btn-small btn-info pull-left", id = "btn-report" })
+                  @Html.ActionLink("Failure List Printable Report (pdf)", "FailureList", "Reports", new { area = "admin", eventid = 0, projectId = 0 }, new { @class = "btn-report btn btn-small btn-danger pull-left", id = "btn-report" })
+                  @Html.ActionLink("Canceled List Printable Report (pdf)", "SuccessFullMembers", "Reports", new { area = "admin", eventid = 0, projectId = 0, reportType = "failure" }, new { @class = "btn-report btn btn-small btn-danger pull-left", id = "btn-report" })
+              </div>
     }
 
-</table>
-@Html.PagedListPager(Model, pageNumber => Url.Action("Index", new
+
+</div>
+
+@if (Model.Rows.Count != 0)
 {
-    pageNumber,
-    officerName = Request.QueryString["keywords"]
-}))
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <label class="control-label">Event Name</label>
+            <label class="col-xs-12">@Model.Rows[0]["EventName"]</label>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <label class="control-label">Event L0cation</label>
+            <label class="col-xs-12">@Model.Rows[0]["EventLocation"]</label>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <label class="control-label">Event Held On</label>
+            <label class="col-xs-12">@Model.Rows[0]["EventHeldDate"]</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12"></div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <label class="control-label">Project Name</label>
+            <label class="col-xs-12">@Model.Rows[0]["ProjectName"]</label>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <label class="control-label">Project Type</label>
+            <label class="col-xs-12">@Model.Rows[0]["TypeName"]</label>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <label class="control-label">Project Location</label>
+            <label class="col-xs-12">@Model.Rows[0]["ProjectLocation"]</label>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <label class="control-label">Total Applicable Units</label>
+            <label class="col-xs-12">@Model.Rows[0]["TotalApplicableUnits"]</label>
+        </div>
+    </div>
+}
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>S.No</th>
+            @foreach (System.Data.DataColumn col in Model.Columns)
+            {
+                if (!columnsToExclude.Contains(col.Caption))
+                {
+                    <th>@col.Caption</th>
+                }
+            }
+
+            <th></th>
+        </tr>
+        @{ 
+            int rowno = 1;
+        }
+        @foreach (System.Data.DataRow item in Model.Rows)
+        {
+            <tr>
+                <td>@rowno</td>
+                @foreach (System.Data.DataColumn col in Model.Columns)
+                {
+                    if (!columnsToExclude.Contains(col.Caption))
+                    {
+                        <td>
+                            @*@Html.Display(item[col.Caption].ToString())*@
+                            @item[col.Caption].ToString()
+                        </td>
+                    }
+                }
+
+
+
+                        <td class="position-relative" style="position:relative">
+                            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal_@rowno">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">Are you sure cancel?</h4>
+                                        </div>
+
+                                        @using (Ajax.BeginForm("CancelBalloting", "Ballotings", new AjaxOptions { LoadingElementId = "loading_" + rowno + "" }))
+    {
+                                    <div class="modal-body">
+                                        @Html.AntiForgeryToken()
+                                        <input name="ballotingId" id="ballotingId" type="hidden" value="@item["BallotingId"].ToString()" />
+                                        <label>Description</label>
+                                        <input name="description" id="description" type="text" class="form-control" />
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <span id="loading_@rowno" class="position-absolute" style="display:none; position:absolute; background-color:rgba(0,0,0,0.6); left:0; right:0; top:0; bottom:0; text-align:center;"><i class="fa fa-2x fa-spinner fa-spin"></i></span>
+                                        <button type="submit" class="btn btn-default" id="modal-btn-si">Yes</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="modal-btn-no">No</button>
+                                    </div>}
+
+                                    </div>
+                                    </div>
+                            </div>
+
+                            @*<span id="loading_@rowno" class="position-absolute" style="display:none; position:absolute; background-color:rgba(0,0,0,0.6); left:0; right:0; top:0; bottom:0; text-align:center;"><i class="fa fa-2x fa-spinner fa-spin"></i></span>*@
+                           
+                        <a href="javascript:void();" class="btn-cancel-balloting" data-target="mi-modal_@rowno"><i class="fa fa-trash"></i> Cancel</a>
+
+                        </td>
+            </tr>
+            rowno++;
+        }
+
+    </table>
+</div>
+@*@Html.PagedListPager(Model, pageNumber => Url.Action("Index", new
+    {
+        pageNumber,
+        officerName = Request.QueryString["keywords"]
+    }))*@
+@section scripts{
+<script>
+    $('.btn-cancel-balloting').on('click', function () {
+        var target = $(this).data('target');
+        
+        $('#' + target + '').modal('show');
+
+        //if (confirm('Are you sure to cancel this allocation?')) {
+        //    $(this).closest('form').find('#description').val('description set by ejaz to delete');
+        //    $(this).closest('form').submit();
+        //    $(this).closest('row').remove();
+        //}
+    });
+    $(function () {
+        $('select#EventID').trigger('change');
+    });
+    $('.btn-report').on('click', function (e) {
+
+        e.preventDefault();
+        var url = $(this).attr('href');
+        url = url.replace('eventid=0', 'eventid=' + $('select#EventID').val()).replace('projectId=0', 'projectId=' + $('select#ProjectID').val());
+        var win = window.open(url, '_blank');
+        if (win) {
+            //Browser has allowed it to be opened
+            win.focus();
+        } else {
+            //Browser has blocked it
+            alert('Please allow popups for this website');
+        }
+    });
+
+    $('select#EventID').on('change', function () {
+        $('input#EventID').val($(this).val());
+        $('#loader').toggle();
+        $.get('/api/balloting/get-balloted-projects-for-events/' + $(this).val()).done(function (data) {
+            if (data) {
+                var html = '';
+                $.each(data, function (key, value) {
+                    console.log(value);
+                    html += "<option value='" + value.id + "'>" + value.projectName + "</option>";
+                });
+                $('select#ProjectID').html(html);
+                $('select#ProjectID').trigger('change');
+
+                $('#viewresult').removeClass("disabled");
+                $('.btn-report').removeClass("disabled");
+            }
+            else {
+                $('#viewresult').addClass("disabled");
+                $('.btn-report').addClass("disabled");
+            }
+            $('#loader').toggle();
+
+        });
+    });
+
+    $('select#ProjectID').on('change', function () {
+        $('input#ProjectID').val($(this).val());
+    });
+</script>
+}

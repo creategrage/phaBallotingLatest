@@ -14,6 +14,12 @@
         <hr />
         @Html.ValidationMessage("FormMessage", new { @class = "text-info" })
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @if(ViewBag.Success!=null)
+        {
+        <div class="text-success">
+            @ViewBag.Success
+        </div>
+        }
         <div class="form-group">
             @Html.Label("Upload File:", htmlAttributes: new { @class = "control-label col-xs-3" })
             <div class="col-xs-9">

@@ -138,7 +138,7 @@ namespace phaBalloting.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,OldMFormNo,NameOfOfficer,FatherName,HusbandName,Cnic,OfficeName,OfficeStatus,DateOfJoiningService,PostHeld,OccutionalGroup,DateOfBirth,OfficeAddress,PermanentAddress,HomeTelephone,EmailAddress,ImageUrl,OfficeTelephone,Mobile")] Member member, HttpPostedFileBase ImageUrl)
+        public ActionResult Edit([Bind(Include = "Id,OldMFormNo,NameOfOfficer,FatherName,HusbandName,Cnic,OfficeName,OfficeStatus,DateOfJoiningService,PostHeld,OccutionalGroup,DateOfBirth,OfficeAddress,PermanentAddress,HomeTelephone,EmailAddress,ImageUrl,OfficeTelephone,Mobile")] Member member, HttpPostedFileBase NewImage)
         {
             if (!EnumManager.Modules.Members.IsAuthrozed(EnumManager.Actions.EditRecords))
             {
@@ -149,7 +149,7 @@ namespace phaBalloting.Areas.Admin.Controllers
             {
                 member.ModifiedBy = User.Identity.GetUserId();
                 member.ModfiedOn= DateTime.Now;
-                member.ImageUrl = SaveMemberPic(ImageUrl, member.Cnic);
+                member.ImageUrl = SaveMemberPic(NewImage, member.Cnic);
                 db.Entry(member).State = EntityState.Modified;
                 try
                 {
@@ -382,7 +382,10 @@ namespace phaBalloting.Areas.Admin.Controllers
                 try
                 {
                     string extension = System.IO.Path.GetExtension(ImageFile.FileName);
-                    ImageFile.SaveAs(System.IO.Path.Combine(Server.MapPath(path), filename  + extension));
+                    var fullPath = System.IO.Path.Combine(Server.MapPath(path), filename + extension);
+                    if (System.IO.File.Exists(fullPath))
+                        System.IO.File.Delete(fullPath);
+                    ImageFile.SaveAs(fullPath);
                     path = path + filename  + extension;
                 }
                 catch

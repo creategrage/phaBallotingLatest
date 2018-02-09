@@ -92,6 +92,9 @@
     <Compile Include="BPSProject.cs">
       <DependentUpon>phaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CancelledBalloting.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Event.cs">
       <DependentUpon>phaModel.tt</DependentUpon>
     </Compile>

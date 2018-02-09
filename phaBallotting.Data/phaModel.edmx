@@ -101,6 +101,18 @@
           <Property Name="ProjectId" Type="int" Nullable="false" />
           <Property Name="BPSId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="CancelledBallotings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BallotingId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
         <EntityType Name="Events">
           <Key>
             <PropertyRef Name="Id" />
@@ -258,7 +270,7 @@
           <Property Name="EventID" Type="int" />
           <Property Name="ProjectID" Type="int" />
         </EntityType>
-        <Association Name="FK__Balloting__Event__2739D489">
+        <Association Name="FK__Balloting__Event__412EB0B6">
           <End Role="Events" Type="Self.Events" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -272,7 +284,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Balloting__Membe__282DF8C2">
+        <Association Name="FK__Balloting__Membe__4222D4EF">
           <End Role="Members" Type="Self.Members" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -286,7 +298,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Balloting__Proje__29221CFB">
+        <Association Name="FK__Balloting__Proje__4316F928">
           <End Role="PojectUnits" Type="Self.PojectUnits" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -365,6 +377,20 @@
             </Principal>
             <Dependent Role="BPSProjects">
               <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CancelledBallotings_Balloting">
+          <End Role="Balloting" Type="Self.Balloting" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CancelledBallotings" Type="Self.CancelledBallotings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Balloting">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CancelledBallotings">
+              <PropertyRef Name="BallotingId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -518,6 +544,7 @@
           <EntitySet Name="BPSGroup" EntityType="Self.BPSGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BPSLists" EntityType="Self.BPSLists" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BPSProjects" EntityType="Self.BPSProjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CancelledBallotings" EntityType="Self.CancelledBallotings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="phaConfigurations" EntityType="Self.phaConfigurations" Schema="dbo" store:Type="Tables" />
@@ -529,15 +556,15 @@
           <EntitySet Name="UserActivities" EntityType="Self.UserActivities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WaitingMembers" EntityType="Self.WaitingMembers" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Balloting__Event__2739D489" Association="Self.FK__Balloting__Event__2739D489">
+          <AssociationSet Name="FK__Balloting__Event__412EB0B6" Association="Self.FK__Balloting__Event__412EB0B6">
             <End Role="Events" EntitySet="Events" />
             <End Role="Balloting" EntitySet="Balloting" />
           </AssociationSet>
-          <AssociationSet Name="FK__Balloting__Membe__282DF8C2" Association="Self.FK__Balloting__Membe__282DF8C2">
+          <AssociationSet Name="FK__Balloting__Membe__4222D4EF" Association="Self.FK__Balloting__Membe__4222D4EF">
             <End Role="Members" EntitySet="Members" />
             <End Role="Balloting" EntitySet="Balloting" />
           </AssociationSet>
-          <AssociationSet Name="FK__Balloting__Proje__29221CFB" Association="Self.FK__Balloting__Proje__29221CFB">
+          <AssociationSet Name="FK__Balloting__Proje__4316F928" Association="Self.FK__Balloting__Proje__4316F928">
             <End Role="PojectUnits" EntitySet="PojectUnits" />
             <End Role="Balloting" EntitySet="Balloting" />
           </AssociationSet>
@@ -560,6 +587,10 @@
           <AssociationSet Name="FK_BPSProjects_Projects" Association="Self.FK_BPSProjects_Projects">
             <End Role="Projects" EntitySet="Projects" />
             <End Role="BPSProjects" EntitySet="BPSProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CancelledBallotings_Balloting" Association="Self.FK_CancelledBallotings_Balloting">
+            <End Role="Balloting" EntitySet="Balloting" />
+            <End Role="CancelledBallotings" EntitySet="CancelledBallotings" />
           </AssociationSet>
           <AssociationSet Name="FK_Members_BPSLists" Association="Self.FK_Members_BPSLists">
             <End Role="BPSLists" EntitySet="BPSLists" />
@@ -699,6 +730,11 @@
             <End Role="ProjectType" EntitySet="ProjectTypes" />
             <End Role="ProjectTypeConfiguration" EntitySet="ProjectTypeConfigurations" />
           </AssociationSet>
+          <EntitySet Name="CancelledBallotings" EntityType="phaBallotingModel.CancelledBalloting" />
+          <AssociationSet Name="FK_CancelledBallotings_Balloting" Association="phaBallotingModel.FK_CancelledBallotings_Balloting">
+            <End Role="Balloting" EntitySet="Ballotings" />
+            <End Role="CancelledBalloting" EntitySet="CancelledBallotings" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AppForm">
           <Key>
@@ -776,6 +812,7 @@
           <NavigationProperty Name="Event" Relationship="phaBallotingModel.FK__Balloting__Event__2739D489" FromRole="Balloting" ToRole="Event" />
           <NavigationProperty Name="Member" Relationship="phaBallotingModel.FK__Balloting__Membe__282DF8C2" FromRole="Balloting" ToRole="Member" />
           <NavigationProperty Name="PojectUnit" Relationship="phaBallotingModel.FK__Balloting__Proje__29221CFB" FromRole="Balloting" ToRole="PojectUnit" />
+          <NavigationProperty Name="CancelledBallotings" Relationship="phaBallotingModel.FK_CancelledBallotings_Balloting" FromRole="Balloting" ToRole="CancelledBalloting" />
         </EntityType>
         <EntityType Name="BPSGroup">
           <Key>
@@ -1239,6 +1276,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CancelledBalloting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BallotingId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Balloting" Relationship="phaBallotingModel.FK_CancelledBallotings_Balloting" FromRole="CancelledBalloting" ToRole="Balloting" />
+        </EntityType>
+        <Association Name="FK_CancelledBallotings_Balloting">
+          <End Type="phaBallotingModel.Balloting" Role="Balloting" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.CancelledBalloting" Role="CancelledBalloting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Balloting">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CancelledBalloting">
+              <PropertyRef Name="BallotingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1514,6 +1578,19 @@
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
                 <ScalarProperty Name="EventID" ColumnName="EventID" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CancelledBallotings">
+            <EntityTypeMapping TypeName="phaBallotingModel.CancelledBalloting">
+              <MappingFragment StoreEntitySet="CancelledBallotings">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BallotingId" ColumnName="BallotingId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

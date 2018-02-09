@@ -19,6 +19,9 @@
             AddRecords = 4,
             Any=5
         }
-
+        public enum ballotinTypes
+        {
+            run, rerun, runwaiting
+        }
     }
 }

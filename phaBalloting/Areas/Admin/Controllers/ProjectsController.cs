@@ -328,11 +328,87 @@ namespace phaBalloting.Areas.Admin.Controllers
             {
                 if (file.FileName.EndsWith(".xls") || file.FileName.EndsWith(".xlsx"))
                 {
-                    FileInfo f = new FileInfo(file.FileName);
+                    //Read bytes from http input stream
+                    System.IO.BinaryReader b = new System.IO.BinaryReader(file.InputStream);
+                    //byte[] binData = b.ReadBytes(file.InputStream.Length);
+                    var exvelPckg = new OfficeOpenXml.ExcelPackage(file.InputStream).Workbook.Worksheets.FirstOrDefault();
+                    var projectName = string.IsNullOrEmpty(exvelPckg.Cells[3, 2].Text.Trim()) ? string.Empty : exvelPckg.Cells[3, 2].Text.ToLower().Trim();
+                    var projectExist = db.Projects.ToList().Where(x => x.ProjectName.ToLower().Trim() == projectName).FirstOrDefault();
+                    if (projectExist == null)
+                    {
+                        ModelState.AddModelError("","Project Name is invalid. No such record found.");
+                        return View();
+                    }
 
-                    var exvelPckg = new OfficeOpenXml.ExcelPackage(f, true).Workbook.Worksheets.FirstOrDefault();
+                    for (int i = 3; i <= exvelPckg.Dimension.End.Column; i++)
+                    {
+                        string colName = exvelPckg.Cells[2, i].Value.ToString();
+                        if (string.IsNullOrEmpty(colName))
+                            continue;
+                        var attributeInDb = db.AttributesTypes.Where(w => w.AttributeName == colName).FirstOrDefault();
+                        if (attributeInDb == null)
+                        {
+                            attributeInDb = new AttributesType();
+                            attributeInDb.AttributeName = colName;
+                            attributeInDb.DataTypeId = 1;
+                            attributeInDb.Description = string.Empty;
+                            attributeInDb.EntryDate = DateTime.Now;
+                            attributeInDb.IsActive = true;
+                            attributeInDb.IsDeleted = false;
+                            attributeInDb.UserId = User.Identity.GetUserId();
+                            attributeInDb.ProjectTypeConfigurations.Add(new ProjectTypeConfiguration { Description = string.Empty, EntryDate = DateTime.Now, IsActive = true, IsDeleted = false, PojectTypeId = projectExist.ProjectTypeId.Value, UserId = User.Identity.GetUserId() });
+                            db.AttributesTypes.Add(attributeInDb);
+                            db.SaveChanges();
+                        }
+                    }
 
-                    var start = exvelPckg.Dimension.Start;
+                    for (int row = 3; row <= exvelPckg.Dimension.End.Row; row++)
+                    {
+                        
+                        PojectUnit projectUnit = null;
+                        if (row > 1)
+                        {
+                            new PojectUnit();
+                            projectUnit = new PojectUnit { PojectId = projectExist.Id, EntryDate = DateTime.Now, Description = string.Empty, IsActive = true, IsDeleted = false, UnitNumber = int.Parse(exvelPckg.Cells[row, 1].Value.ToString().Trim()), UserId = User.Identity.GetUserId() };
+
+                        }
+                        if (projectUnit != null)
+                        {
+                            //first 3 columns are S.no, ProjectName, Project Types
+                            for (int col = 3; col <= exvelPckg.Dimension.End.Column; col++)
+                            {
+                                string colName = exvelPckg.Cells[2, col].Value.ToString();
+                                if (string.IsNullOrEmpty(colName))
+                                    continue;
+                                var attributeInDb = db.AttributesTypes.Where(w => w.AttributeName == colName).FirstOrDefault();
+
+
+                                if (attributeInDb != null)
+                                {
+                                    ProjectUnitAttribute unitAttribute = new ProjectUnitAttribute();
+                                    unitAttribute.AttributeId = attributeInDb.Id;
+                                    unitAttribute.AttributeValue = string.IsNullOrEmpty(exvelPckg.Cells[row, col].Text.Trim()) ? string.Empty : exvelPckg.Cells[row, col].Text.ToLower().Trim();
+                                    unitAttribute.IsActive = true;
+                                    unitAttribute.IsDeleted = false;
+                                    unitAttribute.EntryDate = DateTime.Now;
+                                    unitAttribute.UserId = User.Identity.GetUserId();
+
+                                    //unitAttribute.UnitId = db.PojectUnits.ToList().LastOrDefault().Id;
+
+                                    projectUnit.ProjectUnitAttributes.Add(unitAttribute);
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError("","No Project Attribute Defined for "+colName);
+                                    return View();
+                                }
+                            }//end of column loop
+                            db.PojectUnits.Add(projectUnit);
+                        }//end of projectUnit!=null
+                    }//end of row loop
+                    #region SumairaMethod
+                    /*
+                     * var start = exvelPckg.Dimension.Start;
                     var end = exvelPckg.Dimension.End;
                     
                     string state="continue";
@@ -344,9 +420,8 @@ namespace phaBalloting.Areas.Admin.Controllers
                     }
 
                     int projectId = 0;
-                    var projectUnit = new PojectUnit();
-
-                    for (int row = start.Row + 1; row <= end.Row; row++)
+                    
+                        for (int row = start.Row + 1; row <= end.Row; row++)
                     {
                         if (state.Equals("continue"))
                             for (int col = start.Column + 1; col <= end.Column; col++)
@@ -356,7 +431,7 @@ namespace phaBalloting.Areas.Admin.Controllers
                                     {
                                         if (col == 2 && row > 1)
                                         {
-                                            projectUnit = new PojectUnit { EntryDate = DateTime.Now, Description = string.Empty, IsActive = true, IsDeleted = false, UnitNumber = int.Parse(exvelPckg.Cells[row, col].Value.ToString().Trim()), UserId = User.Identity.GetUserId() };
+                                            //projectUnit = new PojectUnit { EntryDate = DateTime.Now, Description = string.Empty, IsActive = true, IsDeleted = false, UnitNumber = int.Parse(exvelPckg.Cells[row, col].Value.ToString().Trim()), UserId = User.Identity.GetUserId() };
 
                                         }
                                         if (colName == "Project" && col == 3)
@@ -385,7 +460,7 @@ namespace phaBalloting.Areas.Admin.Controllers
                                             if (attributeInDb != null)
                                             {
                                                 ProjectUnitAttribute unitAttribute = new ProjectUnitAttribute();
-                                                unitAttribute.AttributeId = db.AttributesTypes.Where(w => w.AttributeName == colName).FirstOrDefault().Id;
+                                                unitAttribute.AttributeId = attributeInDb.Id;
                                                 unitAttribute.AttributeValue = exvelPckg.Cells[row, col].Value.ToString();
                                                 
                                                 unitAttribute.IsActive = true;
@@ -408,8 +483,7 @@ namespace phaBalloting.Areas.Admin.Controllers
                                     }
                                 else
                                     break;
-                                try { db.SaveChanges(); }
-                                catch (Exception ex) { string excep = ex.Message; }
+                                
                             }
                         else
                         {
@@ -417,7 +491,16 @@ namespace phaBalloting.Areas.Admin.Controllers
                             break;
                         }
                     }
-                    UserHelper.WriteActivity("Imported Excel File of Project Id: " + projectId);
+                        */
+                    #endregion
+                    try {
+                        db.SaveChanges();
+                        ViewBag.Sucess = "Successfully Imported Records."; 
+                    }
+                    catch  { ModelState.AddModelError("","Unable to Store data. Please verify the excel sheet format and data.");
+                        return View();
+                    }
+                    UserHelper.WriteActivity("Imported Excel File of Project : " + exvelPckg.Cells[1,2].Value.ToString());
                     return RedirectToAction("Index");
                     
                 }

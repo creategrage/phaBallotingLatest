@@ -47,7 +47,7 @@ namespace phaBalloting.Helpers
         public static bool WriteActivity(string description) {
 
             var activity = new Data.UserActivity();
-            activity.ClientDetail = "User accessed the page using IP: "+HttpContext.Current.Request.UserHostAddress+" Name of System: "+ System.Net.Dns.GetHostEntry(HttpContext.Current.Request.UserHostAddress).HostName + " Browser: " + ""+HttpContext.Current.Request.Browser.Platform+" version "+ HttpContext.Current.Request.Browser.Version ;
+            activity.ClientDetail = "IP: "+HttpContext.Current.Request.UserHostAddress+" Name of System: "+ System.Net.Dns.GetHostEntry(HttpContext.Current.Request.UserHostAddress).HostName + " Browser: " + ""+HttpContext.Current.Request.Browser.Platform+" version "+ HttpContext.Current.Request.Browser.Version ;
             activity.Description = description;
             activity.EntryDate = DateTime.Now;
             activity.UserId = HttpContext.Current.User.Identity.GetUserId();
