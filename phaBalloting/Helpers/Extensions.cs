@@ -59,7 +59,7 @@ namespace phaBalloting.Helpers
 
             }
             else sql = @"SELECT Authentications." + action.ToString() + " from Authentications, AspNetRoles Where AspNetRoles.Name In(" + string.Join(",", HttpContext.Current.User.Identity.Name.GetRoles()) + ") and Authentications." + action.ToString() + "=1 and FormId=" + module.GetId();
-           
+            db = new Data.phaEntities();
                 var result = db.Database.SqlQuery<Areas.Admin.Models.AuthenticationModel.authenticationClass>(sql).ToList();
                 if (result.Any())
                 {
