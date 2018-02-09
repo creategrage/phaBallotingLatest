@@ -163,7 +163,7 @@ namespace phaBalloting.Areas.Admin.Controllers
             if (currentBallotingType == EnumManager.ballotinTypes.run || currentBallotingType == EnumManager.ballotinTypes.rerun)
                 membersToBeIncluded = db.Members.Where(w => w.Ballotings.Count() == 0 && w.IsActive && !w.IsDeleted).ToList().Where(w => projectBPSGroup.Contains(w.BPSList.BPS.Trim().ToLower())).ToList();
             else if (currentBallotingType == EnumManager.ballotinTypes.runwaiting)
-                membersToBeIncluded = db.Members.Where(w => w.Ballotings.Count() == 0 && w.WaitingMembers.Where(w => w.ProjectID == projectId && w.EventID == eventId).Count() > 0 && w.IsActive && !w.IsDeleted).ToList().Where(w => projectBPSGroup.Contains(w.BPSList.BPS.Trim().ToLower())).ToList();
+                membersToBeIncluded = db.Members.Where(w => w.Ballotings.Count() == 0 && w.WaitingMembers.Where(ww => ww.ProjectID == projectId && ww.EventID == eventId).Count() > 0 && w.IsActive && !w.IsDeleted).ToList().Where(w => projectBPSGroup.Contains(w.BPSList.BPS.Trim().ToLower())).ToList();
 
             if (membersToBeIncluded.Count == 0)
             {
