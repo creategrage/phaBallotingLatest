@@ -5,37 +5,76 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+
+<style>
+    #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(odd) {
+            background-color: #27ae31;
+            color: #fff;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #79f56f;
+            color: white;
+        }
+</style>
+
+
 <h2>Details</h2>
 
 <div>
     <h4>Balloting</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayName("Event Name")
-        </dt>
+    <center>
+        <table id="customers">
+            <tr>
+                <th>
+                    @Html.DisplayName("Event Name")
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.Event.EventName)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.Event.EventName)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayName("Name of Officer")
+                </th>
 
-        <dt>
-            @Html.DisplayName("Name of Officer")
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.Member.NameOfOfficer)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayName("Project Name")
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.Member.NameOfOfficer)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.PojectUnit.Project.ProjectName)
+                </td>
+            </tr>
+        </table>
+    </center>
 
-        <dt>
-            @Html.DisplayName("Project Name")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PojectUnit.Project.ProjectName)
-        </dd>
-
-    </dl>
+   
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

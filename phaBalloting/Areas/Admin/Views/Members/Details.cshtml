@@ -5,157 +5,136 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+
+<style>
+    #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(odd) {
+            background-color: #27ae31;
+            color: #fff;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #79f56f;
+            color: white;
+        }
+</style>
+
+
+
 <h2>Details</h2>
 
 <div>
     <h4>Member</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayName("Old M Form No")
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.OldMFormNo)
-        </dd>
+    <center>
+    <table id="customers" style="width:50%;">
 
-        <dt>
-            @Html.DisplayName("Name of Officer")
-        </dt>
+        <tbody>
+            <tr>
+                <th> @Html.DisplayName("Old M Form No")</th>
+                <td>@Html.DisplayFor(model => model.OldMFormNo)</td>
 
-        <dd>
-            @Html.DisplayFor(model => model.NameOfOfficer)
-        </dd>
+            </tr>
+            <tr>
+                <th> @Html.DisplayName("Name of Officer")</th>
+                <td>@Html.DisplayFor(model => model.NameOfOfficer)</td>
 
-        <dt>
-            @Html.DisplayName("Father Name")
-        </dt>
+            </tr>
+            <tr>
+                <th>@Html.DisplayName("Father Name")</th>
+                <td>@Html.DisplayFor(model => model.FatherName)</td>
 
-        <dd>
-            @Html.DisplayFor(model => model.FatherName)
-        </dd>
+            </tr>
+            <tr>
+                <th>Husband Name</th>
+                <td>@Html.DisplayFor(model => model.HusbandName)</td>
 
-        <dt>
-            @Html.DisplayName("Husband Name")
-        </dt>
+            </tr>
+            <tr>
+                <th>CNIC</th>
+                <td>@Html.DisplayFor(model => model.Cnic)</td>
 
-        <dd>
-            @Html.DisplayFor(model => model.HusbandName)
-        </dd>
+            </tr>
+            <tr>
+                <th>Office Name</th>
+                <td>@Html.DisplayFor(model => model.OfficeName)</td>
 
-        <dt>
-            @Html.DisplayName("CNIC")
-        </dt>
+            </tr>
+            <tr>
+                <th>Office Status</th>
+                <td>@Html.DisplayFor(model => model.OfficeStatus)</td>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cnic)
-        </dd>
+            </tr>
+            <tr>
+                <th> Date of joining</th>
+                <td>@Html.DisplayFor(model => model.DateOfJoiningService)</td>
 
-        <dt>
-            @Html.DisplayName("Office Name")
-        </dt>
+            </tr>
+            <tr>
+                <th>Post held</th>
+                <td>@Html.DisplayFor(model => model.BPSList.BPS)</td>
 
-        <dd>
-            @Html.DisplayFor(model => model.OfficeName)
-        </dd>
+            </tr>
+            <tr>
+                <th>Occutional group</th>
+                <td>@Html.DisplayFor(model => model.OccutionalGroup)</td>
+            </tr>
 
-        <dt>
-            @Html.DisplayName("Office Status")
-        </dt>
+            <tr>
+                <th>Date of birth</th>
+                <td>@Html.DisplayFor(model => model.DateOfBirth)</td>
+            </tr>
+            <tr>
+                <th>Office Address</th>
+                <td>@Html.DisplayFor(model => model.OfficeAddress)</td>
+            </tr>
+            <tr>
+                <th>Permanent Address</th>
+                <td>@Html.DisplayFor(model => model.PermanentAddress)</td>
+            </tr>
+            <tr>
+                <th>Home Tel No</th>
+                <td>@Html.DisplayFor(model => model.HomeTelephone)</td>
+            </tr>
+            <tr>
+                <th>Email Address</th>
+                <td>@Html.DisplayFor(model => model.EmailAddress)</td>
+            </tr>
+            <tr>
+                <th>Image Url</th>
+                <td>@Html.DisplayFor(model => model.ImageUrl)</td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.OfficeStatus)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Date of Joining")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateOfJoiningService)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Post Held")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PostHeld)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Occutional Group")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OccutionalGroup)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Date of Birth")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateOfBirth)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Office Address")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OfficeAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Permanent Address")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PermanentAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Home Telephone")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HomeTelephone)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Email Address")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EmailAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Image Url")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageUrl)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Office Telephone")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OfficeTelephone)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Mobile #")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mobile)
-        </dd>
-
-    </dl>
+            <tr>
+                <th>Office Tel No</th>
+                <td>@Html.DisplayFor(model => model.OfficeTelephone)</td>
+            </tr>
+            <tr>
+                <th>Mobile No</th>
+                <td> @Html.DisplayFor(model => model.Mobile)</td>
+            </tr>
+           
+        </tbody>
+    </table>
+        </center>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

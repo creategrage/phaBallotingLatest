@@ -5,37 +5,75 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+
+<style>
+    #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(odd) {
+            background-color: #27ae31;
+            color: #fff;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #79f56f;
+            color: white;
+        }
+</style>
+
+
 <h2>Details</h2>
 
 <div>
     <h4>Event</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayName("Event Name")
-        </dt>
+    <center>
+        <table id="customers">
+            <tr>
+                <th>
+                    @Html.DisplayName("Event Name")
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.EventName)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.EventName)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayName("Event Location")
+                </th>
 
-        <dt>
-            @Html.DisplayName("Event Location")
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.EventLocation)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayName("Entry Date")
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.EventLocation)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Entry Date")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EntryDate)
-        </dd>
-
-    </dl>
+                <td>
+                    @Html.DisplayFor(model => model.EntryDate)
+                </td>
+            </tr>
+        </table>
+    </center>
+    
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

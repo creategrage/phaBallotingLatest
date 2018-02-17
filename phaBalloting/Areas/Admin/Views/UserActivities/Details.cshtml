@@ -5,45 +5,82 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<style>
+    #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(odd) {
+            background-color: #27ae31;
+            color: #fff;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #79f56f;
+            color: white;
+        }
+</style>
+
 <h2>Details</h2>
 
 <div>
     <h4>UserActivity</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
+    <center>
+        <table id="customers">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.UserId)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EntryDate)
+                </th>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EntryDate)
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.EntryDate)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.EntryDate)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.Description)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClientDetail)
+                </th>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ClientDetail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ClientDetail)
-        </dd>
-
-    </dl>
+                <td>
+                    @Html.DisplayFor(model => model.ClientDetail)
+                </td>
+            </tr>
+        </table>
+    </center>
+   
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
