@@ -27,6 +27,9 @@ namespace phaBalloting.Data
     
         public virtual DbSet<AppForm> AppForms { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<AttributeDataType> AttributeDataTypes { get; set; }
         public virtual DbSet<AttributesType> AttributesTypes { get; set; }
         public virtual DbSet<Authentication> Authentications { get; set; }
@@ -34,7 +37,7 @@ namespace phaBalloting.Data
         public virtual DbSet<BPSGroup> BPSGroups { get; set; }
         public virtual DbSet<BPSList> BPSLists { get; set; }
         public virtual DbSet<BPSProject> BPSProjects { get; set; }
-        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<CancelledBalloting> CancelledBallotings { get; set; }
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<phaConfiguration> phaConfigurations { get; set; }
         public virtual DbSet<PojectUnit> PojectUnits { get; set; }
@@ -45,6 +48,6 @@ namespace phaBalloting.Data
         public virtual DbSet<UserActivity> UserActivities { get; set; }
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
         public virtual DbSet<WaitingMember> WaitingMembers { get; set; }
-        public virtual DbSet<CancelledBalloting> CancelledBallotings { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
     }
 }

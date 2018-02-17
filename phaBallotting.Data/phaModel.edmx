@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="phaBallotingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="phaBallotingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AppForms">
           <Key>
             <PropertyRef Name="Id" />
@@ -19,6 +19,50 @@
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="AttributeDataTypes">
           <Key>
@@ -120,6 +164,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EventName" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="EventLocation" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="EventHeld" Type="date" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="EntryDate" Type="date" Nullable="false" />
           <Property Name="LastModifiedOn" Type="date" />
@@ -270,7 +315,7 @@
           <Property Name="EventID" Type="int" />
           <Property Name="ProjectID" Type="int" />
         </EntityType>
-        <Association Name="FK__Balloting__Event__412EB0B6">
+        <Association Name="FK__Balloting__Event__693CA210">
           <End Role="Events" Type="Self.Events" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -391,6 +436,62 @@
             </Principal>
             <Dependent Role="CancelledBallotings">
               <PropertyRef Name="BallotingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -537,6 +638,10 @@
         <EntityContainer Name="phaBallotingModelStoreContainer">
           <EntitySet Name="AppForms" EntityType="Self.AppForms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AttributeDataTypes" EntityType="Self.AttributeDataTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AttributesTypes" EntityType="Self.AttributesTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Authentications" EntityType="Self.Authentications" Schema="dbo" store:Type="Tables" />
@@ -556,7 +661,7 @@
           <EntitySet Name="UserActivities" EntityType="Self.UserActivities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WaitingMembers" EntityType="Self.WaitingMembers" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Balloting__Event__412EB0B6" Association="Self.FK__Balloting__Event__412EB0B6">
+          <AssociationSet Name="FK__Balloting__Event__693CA210" Association="Self.FK__Balloting__Event__693CA210">
             <End Role="Events" EntitySet="Events" />
             <End Role="Balloting" EntitySet="Balloting" />
           </AssociationSet>
@@ -591,6 +696,22 @@
           <AssociationSet Name="FK_CancelledBallotings_Balloting" Association="Self.FK_CancelledBallotings_Balloting">
             <End Role="Balloting" EntitySet="Balloting" />
             <End Role="CancelledBallotings" EntitySet="CancelledBallotings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_Members_BPSLists" Association="Self.FK_Members_BPSLists">
             <End Role="BPSLists" EntitySet="BPSLists" />
@@ -640,6 +761,9 @@
         <EntityContainer Name="phaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AppForms" EntityType="phaBallotingModel.AppForm" />
           <EntitySet Name="AspNetRoles" EntityType="phaBallotingModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="phaBallotingModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="phaBallotingModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="phaBallotingModel.AspNetUser" />
           <EntitySet Name="AttributeDataTypes" EntityType="phaBallotingModel.AttributeDataType" />
           <EntitySet Name="AttributesTypes" EntityType="phaBallotingModel.AttributesType" />
           <EntitySet Name="Authentications" EntityType="phaBallotingModel.Authentication" />
@@ -647,7 +771,7 @@
           <EntitySet Name="BPSGroups" EntityType="phaBallotingModel.BPSGroup" />
           <EntitySet Name="BPSLists" EntityType="phaBallotingModel.BPSList" />
           <EntitySet Name="BPSProjects" EntityType="phaBallotingModel.BPSProject" />
-          <EntitySet Name="Events" EntityType="phaBallotingModel.Event" />
+          <EntitySet Name="CancelledBallotings" EntityType="phaBallotingModel.CancelledBalloting" />
           <EntitySet Name="Members" EntityType="phaBallotingModel.Member" />
           <EntitySet Name="phaConfigurations" EntityType="phaBallotingModel.phaConfiguration" />
           <EntitySet Name="PojectUnits" EntityType="phaBallotingModel.PojectUnit" />
@@ -666,6 +790,14 @@
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="Authentication" EntitySet="Authentications" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="phaBallotingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="phaBallotingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
           <AssociationSet Name="FK_AttributeTypes_AttributeDataTypes" Association="phaBallotingModel.FK_AttributeTypes_AttributeDataTypes">
             <End Role="AttributeDataType" EntitySet="AttributeDataTypes" />
             <End Role="AttributesType" EntitySet="AttributesTypes" />
@@ -678,17 +810,17 @@
             <End Role="AttributesType" EntitySet="AttributesTypes" />
             <End Role="ProjectUnitAttribute" EntitySet="ProjectUnitAttributes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Balloting__Event__2739D489" Association="phaBallotingModel.FK__Balloting__Event__2739D489">
-            <End Role="Event" EntitySet="Events" />
-            <End Role="Balloting" EntitySet="Ballotings" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Balloting__Membe__282DF8C2" Association="phaBallotingModel.FK__Balloting__Membe__282DF8C2">
+          <AssociationSet Name="FK__Balloting__Membe__4222D4EF" Association="phaBallotingModel.FK__Balloting__Membe__4222D4EF">
             <End Role="Member" EntitySet="Members" />
             <End Role="Balloting" EntitySet="Ballotings" />
           </AssociationSet>
-          <AssociationSet Name="FK__Balloting__Proje__29221CFB" Association="phaBallotingModel.FK__Balloting__Proje__29221CFB">
+          <AssociationSet Name="FK__Balloting__Proje__4316F928" Association="phaBallotingModel.FK__Balloting__Proje__4316F928">
             <End Role="PojectUnit" EntitySet="PojectUnits" />
             <End Role="Balloting" EntitySet="Ballotings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CancelledBallotings_Balloting" Association="phaBallotingModel.FK_CancelledBallotings_Balloting">
+            <End Role="Balloting" EntitySet="Ballotings" />
+            <End Role="CancelledBalloting" EntitySet="CancelledBallotings" />
           </AssociationSet>
           <AssociationSet Name="FK_BPSProjects_BPSLists" Association="phaBallotingModel.FK_BPSProjects_BPSLists">
             <End Role="BPSList" EntitySet="BPSLists" />
@@ -701,10 +833,6 @@
           <AssociationSet Name="FK_BPSProjects_Projects" Association="phaBallotingModel.FK_BPSProjects_Projects">
             <End Role="Project" EntitySet="Projects" />
             <End Role="BPSProject" EntitySet="BPSProjects" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WaitingMembers_Events" Association="phaBallotingModel.FK_WaitingMembers_Events">
-            <End Role="Event" EntitySet="Events" />
-            <End Role="WaitingMember" EntitySet="WaitingMembers" />
           </AssociationSet>
           <AssociationSet Name="FK_WaitingMembers_Members" Association="phaBallotingModel.FK_WaitingMembers_Members">
             <End Role="Member" EntitySet="Members" />
@@ -730,10 +858,18 @@
             <End Role="ProjectType" EntitySet="ProjectTypes" />
             <End Role="ProjectTypeConfiguration" EntitySet="ProjectTypeConfigurations" />
           </AssociationSet>
-          <EntitySet Name="CancelledBallotings" EntityType="phaBallotingModel.CancelledBalloting" />
-          <AssociationSet Name="FK_CancelledBallotings_Balloting" Association="phaBallotingModel.FK_CancelledBallotings_Balloting">
+          <AssociationSet Name="AspNetUserRoles" Association="phaBallotingModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Events" EntityType="phaBallotingModel.Event" />
+          <AssociationSet Name="FK__Balloting__Event__693CA210" Association="phaBallotingModel.FK__Balloting__Event__693CA210">
+            <End Role="Event" EntitySet="Events" />
             <End Role="Balloting" EntitySet="Ballotings" />
-            <End Role="CancelledBalloting" EntitySet="CancelledBallotings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WaitingMembers_Events" Association="phaBallotingModel.FK_WaitingMembers_Events">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="WaitingMember" EntitySet="WaitingMembers" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AppForm">
@@ -752,6 +888,48 @@
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Authentications" Relationship="phaBallotingModel.FK_Authentications_AspNetRoles" FromRole="AspNetRole" ToRole="Authentication" />
+          <NavigationProperty Name="AspNetUsers" Relationship="phaBallotingModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="phaBallotingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="phaBallotingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="phaBallotingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="phaBallotingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="phaBallotingModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
         <EntityType Name="AttributeDataType">
           <Key>
@@ -809,10 +987,10 @@
           <Property Name="MemberID" Type="Int32" Nullable="false" />
           <Property Name="ProjectUnitID" Type="Int32" Nullable="false" />
           <Property Name="EventID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Event" Relationship="phaBallotingModel.FK__Balloting__Event__2739D489" FromRole="Balloting" ToRole="Event" />
-          <NavigationProperty Name="Member" Relationship="phaBallotingModel.FK__Balloting__Membe__282DF8C2" FromRole="Balloting" ToRole="Member" />
-          <NavigationProperty Name="PojectUnit" Relationship="phaBallotingModel.FK__Balloting__Proje__29221CFB" FromRole="Balloting" ToRole="PojectUnit" />
+          <NavigationProperty Name="Member" Relationship="phaBallotingModel.FK__Balloting__Membe__4222D4EF" FromRole="Balloting" ToRole="Member" />
+          <NavigationProperty Name="PojectUnit" Relationship="phaBallotingModel.FK__Balloting__Proje__4316F928" FromRole="Balloting" ToRole="PojectUnit" />
           <NavigationProperty Name="CancelledBallotings" Relationship="phaBallotingModel.FK_CancelledBallotings_Balloting" FromRole="Balloting" ToRole="CancelledBalloting" />
+          <NavigationProperty Name="Event" Relationship="phaBallotingModel.FK__Balloting__Event__693CA210" FromRole="Balloting" ToRole="Event" />
         </EntityType>
         <EntityType Name="BPSGroup">
           <Key>
@@ -848,21 +1026,18 @@
           <NavigationProperty Name="BPSList" Relationship="phaBallotingModel.FK_BPSProjects_BPSLists" FromRole="BPSProject" ToRole="BPSList" />
           <NavigationProperty Name="Project" Relationship="phaBallotingModel.FK_BPSProjects_Projects" FromRole="BPSProject" ToRole="Project" />
         </EntityType>
-        <EntityType Name="Event">
+        <EntityType Name="CancelledBalloting">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EventName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="EventLocation" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BallotingId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="LastModifiedOn" Type="DateTime" Precision="0" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <NavigationProperty Name="Ballotings" Relationship="phaBallotingModel.FK__Balloting__Event__2739D489" FromRole="Event" ToRole="Balloting" />
-          <NavigationProperty Name="WaitingMembers" Relationship="phaBallotingModel.FK_WaitingMembers_Events" FromRole="Event" ToRole="WaitingMember" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Balloting" Relationship="phaBallotingModel.FK_CancelledBallotings_Balloting" FromRole="CancelledBalloting" ToRole="Balloting" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -894,7 +1069,7 @@
           <Property Name="ModfiedOn" Type="DateTime" Precision="0" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Ballotings" Relationship="phaBallotingModel.FK__Balloting__Membe__282DF8C2" FromRole="Member" ToRole="Balloting" />
+          <NavigationProperty Name="Ballotings" Relationship="phaBallotingModel.FK__Balloting__Membe__4222D4EF" FromRole="Member" ToRole="Balloting" />
           <NavigationProperty Name="BPSList" Relationship="phaBallotingModel.FK_Members_BPSLists" FromRole="Member" ToRole="BPSList" />
           <NavigationProperty Name="WaitingMembers" Relationship="phaBallotingModel.FK_WaitingMembers_Members" FromRole="Member" ToRole="WaitingMember" />
         </EntityType>
@@ -919,7 +1094,7 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsDeleted" Type="Boolean" />
-          <NavigationProperty Name="Ballotings" Relationship="phaBallotingModel.FK__Balloting__Proje__29221CFB" FromRole="PojectUnit" ToRole="Balloting" />
+          <NavigationProperty Name="Ballotings" Relationship="phaBallotingModel.FK__Balloting__Proje__4316F928" FromRole="PojectUnit" ToRole="Balloting" />
           <NavigationProperty Name="Project" Relationship="phaBallotingModel.FK_PojectUnits_Projects" FromRole="PojectUnit" ToRole="Project" />
           <NavigationProperty Name="ProjectUnitAttributes" Relationship="phaBallotingModel.FK_ProjectUnitAttributes_PojectUnits" FromRole="PojectUnit" ToRole="ProjectUnitAttribute" />
         </EntityType>
@@ -1022,9 +1197,9 @@
           <Property Name="MemberID" Type="Int32" />
           <Property Name="EventID" Type="Int32" />
           <Property Name="ProjectID" Type="Int32" />
-          <NavigationProperty Name="Event" Relationship="phaBallotingModel.FK_WaitingMembers_Events" FromRole="WaitingMember" ToRole="Event" />
           <NavigationProperty Name="Member" Relationship="phaBallotingModel.FK_WaitingMembers_Members" FromRole="WaitingMember" ToRole="Member" />
           <NavigationProperty Name="Project" Relationship="phaBallotingModel.FK_WaitingMembers_Project" FromRole="WaitingMember" ToRole="Project" />
+          <NavigationProperty Name="Event" Relationship="phaBallotingModel.FK_WaitingMembers_Events" FromRole="WaitingMember" ToRole="Event" />
         </EntityType>
         <Association Name="FK_Authentications_AppForms">
           <End Type="phaBallotingModel.AppForm" Role="AppForm" Multiplicity="1">
@@ -1051,6 +1226,34 @@
             </Principal>
             <Dependent Role="Authentication">
               <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="phaBallotingModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="phaBallotingModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1094,21 +1297,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Balloting__Event__2739D489">
-          <End Type="phaBallotingModel.Event" Role="Event" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="phaBallotingModel.Balloting" Role="Balloting" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Balloting">
-              <PropertyRef Name="EventID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Balloting__Membe__282DF8C2">
+        <Association Name="FK__Balloting__Membe__4222D4EF">
           <End Type="phaBallotingModel.Member" Role="Member" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -1122,7 +1311,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Balloting__Proje__29221CFB">
+        <Association Name="FK__Balloting__Proje__4316F928">
           <End Type="phaBallotingModel.PojectUnit" Role="PojectUnit" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -1133,6 +1322,20 @@
             </Principal>
             <Dependent Role="Balloting">
               <PropertyRef Name="ProjectUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CancelledBallotings_Balloting">
+          <End Type="phaBallotingModel.Balloting" Role="Balloting" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.CancelledBalloting" Role="CancelledBalloting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Balloting">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CancelledBalloting">
+              <PropertyRef Name="BallotingId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1175,20 +1378,6 @@
             </Principal>
             <Dependent Role="BPSProject">
               <PropertyRef Name="ProjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WaitingMembers_Events">
-          <End Type="phaBallotingModel.Event" Role="Event" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="phaBallotingModel.WaitingMember" Role="WaitingMember" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="WaitingMember">
-              <PropertyRef Name="EventID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1276,30 +1465,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CancelledBalloting">
+        <Association Name="AspNetUserRoles">
+          <End Type="phaBallotingModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="phaBallotingModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Event">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BallotingId" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EventName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="EventLocation" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="EventHeld" Type="DateTime" Precision="0" />
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Balloting" Relationship="phaBallotingModel.FK_CancelledBallotings_Balloting" FromRole="CancelledBalloting" ToRole="Balloting" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastModifiedOn" Type="DateTime" Precision="0" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Ballotings" Relationship="phaBallotingModel.FK__Balloting__Event__693CA210" FromRole="Event" ToRole="Balloting" />
+          <NavigationProperty Name="WaitingMembers" Relationship="phaBallotingModel.FK_WaitingMembers_Events" FromRole="Event" ToRole="WaitingMember" />
         </EntityType>
-        <Association Name="FK_CancelledBallotings_Balloting">
-          <End Type="phaBallotingModel.Balloting" Role="Balloting" Multiplicity="1">
+        <Association Name="FK__Balloting__Event__693CA210">
+          <End Type="phaBallotingModel.Event" Role="Event" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="phaBallotingModel.CancelledBalloting" Role="CancelledBalloting" Multiplicity="*" />
+          <End Type="phaBallotingModel.Balloting" Role="Balloting" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Balloting">
+            <Principal Role="Event">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="CancelledBalloting">
-              <PropertyRef Name="BallotingId" />
+            <Dependent Role="Balloting">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WaitingMembers_Events">
+          <End Type="phaBallotingModel.Event" Role="Event" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="phaBallotingModel.WaitingMember" Role="WaitingMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WaitingMember">
+              <PropertyRef Name="EventID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1322,6 +1533,43 @@
             <EntityTypeMapping TypeName="phaBallotingModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="phaBallotingModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="phaBallotingModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="phaBallotingModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1414,17 +1662,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Events">
-            <EntityTypeMapping TypeName="phaBallotingModel.Event">
-              <MappingFragment StoreEntitySet="Events">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <EntitySetMapping Name="CancelledBallotings">
+            <EntityTypeMapping TypeName="phaBallotingModel.CancelledBalloting">
+              <MappingFragment StoreEntitySet="CancelledBallotings">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="EventLocation" ColumnName="EventLocation" />
-                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BallotingId" ColumnName="BallotingId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1582,15 +1828,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CancelledBallotings">
-            <EntityTypeMapping TypeName="phaBallotingModel.CancelledBalloting">
-              <MappingFragment StoreEntitySet="CancelledBallotings">
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="phaBallotingModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="phaBallotingModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="BallotingId" ColumnName="BallotingId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="EventHeld" ColumnName="EventHeld" />
+                <ScalarProperty Name="EventLocation" ColumnName="EventLocation" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

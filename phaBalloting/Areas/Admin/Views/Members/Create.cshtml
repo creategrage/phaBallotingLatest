@@ -1,13 +1,19 @@
 ﻿@model phaBalloting.Data.Member
 
 @{
-                /**/
 
-                ViewBag.Title = "Create";
-                Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+
+<link href="~/Content/themes/base/jquery.datetimepicker.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+
+
 @using (Html.BeginForm("Create", "Members", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{ 
+{
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
@@ -75,9 +81,16 @@
     <div class="form-group">
         @Html.LabelFor(model => model.DateOfJoiningService, "Date of joining", htmlAttributes: new { @class = "control-label col-xs-3" })
         <div class="col-xs-9">
-            @Html.EditorFor(model => model.DateOfJoiningService, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="input-group">
+                @Html.EditorFor(model => model.DateOfJoiningService, new { htmlAttributes = new { @class = "form-control", id = "joiningdate" } })
+                <span class="input-group-addon" id="joiningdate">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
             @Html.ValidationMessageFor(model => model.DateOfJoiningService, "", new { @class = "text-danger" })
         </div>
+
+
     </div>
 
     <div class="form-group">
@@ -107,9 +120,15 @@
     <div class="form-group">
         @Html.LabelFor(model => model.DateOfBirth, "Date of birth", htmlAttributes: new { @class = "control-label col-xs-3" })
         <div class="col-xs-9">
-            @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="input-group">
+                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", id = "dob" } })
+                <span class="input-group-addon" id="dob">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
             @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
         </div>
+
     </div>
 
     <div class="form-group">
@@ -166,6 +185,20 @@
             @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    @section scripts{
+        <script src="~/Scripts/jquery.datetimepicker.js"></script>
+
+        <script>
+            $('#joiningdate').datepicker();
+
+        </script>
+        <script>
+            $('#dob').datepicker();
+
+        </script>
+
+    }
     <div class="">
         <div class=" col-xs-12 pr-3">
             <button type="submit" value="Create" class="pull-right btn btn-success"><i class="fa fa-save"></i> Save</button>

@@ -24,6 +24,7 @@ namespace phaBalloting.Data
         public int Id { get; set; }
         public string EventName { get; set; }
         public string EventLocation { get; set; }
+        public Nullable<System.DateTime> EventHeld { get; set; }
         public string UserId { get; set; }
         public System.DateTime EntryDate { get; set; }
         public Nullable<System.DateTime> LastModifiedOn { get; set; }

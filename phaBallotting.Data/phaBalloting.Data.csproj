@@ -71,6 +71,15 @@
     <Compile Include="AspNetRole.cs">
       <DependentUpon>phaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>phaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AttributeDataType.cs">
       <DependentUpon>phaModel.tt</DependentUpon>
     </Compile>

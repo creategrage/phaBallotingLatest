@@ -25,10 +25,10 @@ namespace phaBalloting.Data
         public int ProjectUnitID { get; set; }
         public int EventID { get; set; }
     
-        public virtual Event Event { get; set; }
         public virtual Member Member { get; set; }
         public virtual PojectUnit PojectUnit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CancelledBalloting> CancelledBallotings { get; set; }
+        public virtual Event Event { get; set; }
     }
 }

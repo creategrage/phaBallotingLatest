@@ -12,15 +12,12 @@ namespace phaBalloting.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class WaitingMember
+    public partial class AspNetUserLogin
     {
-        public int Id { get; set; }
-        public Nullable<int> MemberID { get; set; }
-        public Nullable<int> EventID { get; set; }
-        public Nullable<int> ProjectID { get; set; }
+        public string LoginProvider { get; set; }
+        public string ProviderKey { get; set; }
+        public string UserId { get; set; }
     
-        public virtual Member Member { get; set; }
-        public virtual Project Project { get; set; }
-        public virtual Event Event { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }
